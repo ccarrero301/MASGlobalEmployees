@@ -6,8 +6,8 @@ namespace MASGlobal.Employees.Data.Contracts
 {
     public interface IEmployeeRepository
     {
-        Task<IEnumerable<Employee>> GetAllEmployees();
+        Task<IEnumerable<Employee>> GetAllEmployeesAsync();
 
-        Task<Employee> GetEmployeesById(int employeeId);
+        Task<Employee> GetEmployeesByIdAsync(int employeeId);
     }
 }

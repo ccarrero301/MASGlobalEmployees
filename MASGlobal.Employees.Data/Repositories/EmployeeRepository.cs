@@ -20,19 +20,19 @@ namespace MASGlobal.Employees.Data.Repositories
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Employee>> GetAllEmployees()
+        public async Task<IEnumerable<Employee>> GetAllEmployeesAsync()
         {
             var employeesEndpointRequest = GetEmployeesEndpointRequest();
 
             var dtoEmployeeList =
-                await _restClient.ExecuteGetResultAsync<IEnumerable<DTOs.Employee>>(employeesEndpointRequest);
+                await _restClient.ExecuteGetResultAsync<IEnumerable<DTOs.Employee>>(employeesEndpointRequest).ConfigureAwait(false);
 
             var domainEmployeeList = _mapper.Map<IEnumerable<DTOs.Employee>, IEnumerable<Employee>>(dtoEmployeeList);
 
             return domainEmployeeList;
         }
 
-        public Task<Employee> GetEmployeesById(int employeeId)
+        public Task<Employee> GetEmployeesByIdAsync(int employeeId)
         {
             throw new NotImplementedException();
         }

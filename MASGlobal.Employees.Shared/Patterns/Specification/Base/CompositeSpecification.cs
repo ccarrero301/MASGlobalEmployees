@@ -7,41 +7,25 @@ namespace MASGlobal.Employees.Shared.Patterns.Specification.Base
     {
         public abstract bool IsSatisfiedBy(TEntity entityToTest);
 
-        public ISpecification<TEntity> And(ISpecification<TEntity> specification)
-        {
-            return new AndSpecification<TEntity>(this, specification);
-        }
+        public ISpecification<TEntity> And(ISpecification<TEntity> specification) =>
+            new AndSpecification<TEntity>(this, specification);
 
-        public ISpecification<TEntity> Or(ISpecification<TEntity> specification)
-        {
-            return new OrSpecification<TEntity>(this, specification);
-        }
+        public ISpecification<TEntity> Or(ISpecification<TEntity> specification) =>
+            new OrSpecification<TEntity>(this, specification);
 
-        public ISpecification<TEntity> Not()
-        {
-            return new NotSpecification<TEntity>(this);
-        }
+        public ISpecification<TEntity> Not() => new NotSpecification<TEntity>(this);
 
-        public ISpecification<TEntity> All()
-        {
-            return new AllSpecification<TEntity>();
-        }
+        public ISpecification<TEntity> All() => new AllSpecification<TEntity>();
 
         public static CompositeSpecification<TEntity> operator &(CompositeSpecification<TEntity> specificationLeft,
-            CompositeSpecification<TEntity> specificationRight)
-        {
-            return new AndSpecification<TEntity>(specificationLeft, specificationRight);
-        }
+            CompositeSpecification<TEntity> specificationRight) =>
+            new AndSpecification<TEntity>(specificationLeft, specificationRight);
 
         public static CompositeSpecification<TEntity> operator |(CompositeSpecification<TEntity> specificationLeft,
-            CompositeSpecification<TEntity> specificationRight)
-        {
-            return new OrSpecification<TEntity>(specificationLeft, specificationRight);
-        }
+            CompositeSpecification<TEntity> specificationRight) =>
+            new OrSpecification<TEntity>(specificationLeft, specificationRight);
 
-        public static CompositeSpecification<TEntity> operator !(CompositeSpecification<TEntity> specification)
-        {
-            return new NotSpecification<TEntity>(specification);
-        }
+        public static CompositeSpecification<TEntity> operator !(CompositeSpecification<TEntity> specification) =>
+            new NotSpecification<TEntity>(specification);
     }
 }

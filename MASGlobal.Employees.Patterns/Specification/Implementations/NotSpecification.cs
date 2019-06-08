@@ -3,7 +3,7 @@ using MASGlobal.Employees.Patterns.Specification.Contracts;
 
 namespace MASGlobal.Employees.Patterns.Specification.Implementations
 {
-    internal sealed class NotSpecification<TEntity> : ExpressionSpecification<TEntity>
+    internal sealed class NotSpecification<TEntity> : CompositeSpecification<TEntity>
     {
         private readonly ISpecification<TEntity> _specification;
 

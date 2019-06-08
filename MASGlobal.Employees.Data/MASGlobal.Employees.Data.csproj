@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MASGlobal.Employees.Domain\MASGlobal.Employees.Domain.csproj" />
+    <ProjectReference Include="..\MASGlobal.Employees.Patterns\MASGlobal.Employees.Patterns.csproj" />
+  </ItemGroup>
+
 </Project>

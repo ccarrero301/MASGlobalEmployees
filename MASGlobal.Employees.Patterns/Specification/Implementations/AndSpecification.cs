@@ -3,7 +3,7 @@ using MASGlobal.Employees.Patterns.Specification.Contracts;
 
 namespace MASGlobal.Employees.Patterns.Specification.Implementations
 {
-    internal sealed class AndSpecification<TEntity> : ExpressionSpecification<TEntity>
+    internal sealed class AndSpecification<TEntity> : CompositeSpecification<TEntity>
     {
         private readonly ISpecification<TEntity> _leftSpecification;
         private readonly ISpecification<TEntity> _rightSpecification;

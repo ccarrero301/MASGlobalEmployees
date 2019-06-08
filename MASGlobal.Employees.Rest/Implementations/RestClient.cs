@@ -17,7 +17,8 @@ namespace MASGlobal.Employees.Rest.Implementations
             var restClient = GetRestClient(true, requestInfo);
             var request = GetRequest(Method.POST, requestInfo);
 
-            var restResponse = await ExecutePostWithResponseOrExceptionRetryPolicy<TResult>(restClient, request, 3, 1).ConfigureAwait(false);
+            var restResponse = await ExecutePostWithResponseOrExceptionRetryPolicy<TResult>(restClient, request, 3, 1)
+                .ConfigureAwait(false);
 
             if (restResponse.IsSuccessful)
                 return JsonConvert.DeserializeObject<TResult>(restResponse.Content);
@@ -30,7 +31,9 @@ namespace MASGlobal.Employees.Rest.Implementations
             var restClient = GetRestClient(true, requestInfo);
             var request = GetRequest(Method.GET, requestInfo);
 
-            var restResponse = await ExecuteGetWithResponseOrExceptionRetryPolicyAsync<TResult>(restClient, request, 3, 1).ConfigureAwait(false);
+            var restResponse =
+                await ExecuteGetWithResponseOrExceptionRetryPolicyAsync<TResult>(restClient, request, 3, 1)
+                    .ConfigureAwait(false);
 
             if (restResponse.IsSuccessful)
                 return JsonConvert.DeserializeObject<TResult>(restResponse.Content);

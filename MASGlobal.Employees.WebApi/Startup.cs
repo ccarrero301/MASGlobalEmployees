@@ -6,13 +6,14 @@ using MASGlobal.Employees.Data.Contracts;
 using MASGlobal.Employees.Data.Repositories;
 using MASGlobal.Employees.Rest.Contracts;
 using MASGlobal.Employees.Rest.Implementations;
+using MASGlobal.Employees.Services.Contracts;
+using MASGlobal.Employees.Services.Implementations;
 using MASGlobal.Employees.WebApi.Mappings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -36,6 +37,7 @@ namespace MASGlobal.Employees.WebApi
 
             services.AddScoped<IRestClient, RestClient>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
 
             services.AddSwaggerGen(options =>
             {
@@ -54,11 +56,7 @@ namespace MASGlobal.Employees.WebApi
             });
 
             services.AddMvc()
-                .AddJsonOptions(options =>
-                {
-                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
-                    //options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-                })
+                .AddJsonOptions(options => { options.SerializerSettings.Converters.Add(new StringEnumConverter()); })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

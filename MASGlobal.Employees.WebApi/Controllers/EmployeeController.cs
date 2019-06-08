@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using MASGlobal.Employees.Data.Contracts;
+using MASGlobal.Employees.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MASGlobal.Employees.WebApi.Controllers
@@ -8,20 +8,20 @@ namespace MASGlobal.Employees.WebApi.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly IEmployeeRepository _repository;
+        private readonly IEmployeeService _employeeService;
 
-        public EmployeeController(IEmployeeRepository repository)
+        public EmployeeController(IEmployeeService employeeService)
         {
-            _repository = repository;
+            _employeeService = employeeService;
         }
 
         [HttpGet]
         [Route("all")]
         public async Task<ActionResult> GetEmployees()
         {
-            var employees = await _repository.GetAllEmployeesAsync().ConfigureAwait(false);
+            await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
 
-            return Ok(employees);
+            return Ok("OK");
         }
     }
 }

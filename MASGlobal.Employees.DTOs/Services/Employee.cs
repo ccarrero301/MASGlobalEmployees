@@ -14,10 +14,10 @@
 
         public string EmployeeRoleDescription { get; set; }
 
-        public string EmployeeHourlySalary { get; set; }
+        public double EmployeeHourlySalary { get; set; }
 
-        public string EmployeeMonthlySalary { get; set; }
+        public double EmployeeMonthlySalary { get; set; }
 
-        public string AnnualSalary { get; set; }
+        public double AnnualSalary { get; set; }
     }
 }

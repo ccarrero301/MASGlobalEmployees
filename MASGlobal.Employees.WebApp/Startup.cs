@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using MASGlobal.Employees.Rest.Contracts;
+using MASGlobal.Employees.Rest.Implementations;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +26,7 @@ namespace MASGlobal.Employees.WebApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddScoped<IRestClient, RestClient>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -31,9 +34,8 @@ namespace MASGlobal.Employees.WebApp
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
+
             else
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -48,7 +50,7 @@ namespace MASGlobal.Employees.WebApp
             {
                 routes.MapRoute(
                     "default",
-                    "{controller=Home}/{action=Index}/{id?}");
+                    "{controller=Employee}/{action=Home}/{id?}");
             });
         }
     }

@@ -16,8 +16,8 @@ namespace MASGlobal.Employees.DTOs.Data
 
         [JsonProperty("roleDescription")] public string EmployeeRoleDescription { get; set; }
 
-        [JsonProperty("hourlySalary")] public string EmployeeHourlySalary { get; set; }
+        [JsonProperty("hourlySalary")] public double EmployeeHourlySalary { get; set; }
 
-        [JsonProperty("monthlySalary")] public string EmployeeMonthlySalary { get; set; }
+        [JsonProperty("monthlySalary")] public double EmployeeMonthlySalary { get; set; }
     }
 }

@@ -61,7 +61,6 @@ namespace MASGlobal.Employees.Data.Repositories
         }
 
         private static RestClientRequest GetEmployeesEndpointRequest() =>
-            new RestClientRequest("masglobaltestapi.azurewebsites.net/api/", "Employees", null, null, null,
-                null);
+            new RestClientRequest("masglobaltestapi.azurewebsites.net/api/", "Employees");
     }
 }

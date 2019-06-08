@@ -1,0 +1,73 @@
+﻿@using System.Globalization
+@model MASGlobal.Employees.WebApp.Models.EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+
+    var employeeId = "";
+    if (Model.EmployeeId != int.MinValue)
+    {
+        employeeId = Model.EmployeeId.ToString();
+    }
+}
+
+<form class="m-1 p-1" asp-controller="Employee" asp-action="GetEmployees">
+
+    <div class="text-center">
+        <h1 class="display-4">Here you details about our Employees!</h1>
+    </div>
+
+    <p></p>
+
+    <div class="form-group">
+
+        <label class="col-form-label-lg" asp-for="EmployeeId">Please type the Employee Id, leave it blank to get all employees : </label>
+        <input asp-for="EmployeeId" class="form-control" value="@employeeId"/>
+    </div>
+
+    <div class="text-left">
+        <button class="btn btn-primary" asp-controller="Employee" asp-action="GetEmployeesPost" asp-route-employeeId="@Model.EmployeeId">Get Employees</button>
+    </div>
+
+    <p></p>
+</form>
+
+@if (Model.Employees.Any())
+{
+    <div class="table-responsive-xl text-nowrap">
+        <table class="table table-bordered  table-hover">
+            <thead >
+            <tr class="thead-dark">
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Contract Type</th>
+                <th scope="col">Role Id</th>
+                <th scope="col">Role Name</th>
+                <th scope="col">Role Description</th>
+                <th scope="col">Hourly Salary</th>
+                <th scope="col">Monthly Salary</th>
+                <th scope="col">Annual Salary</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            @foreach (var employee in Model.Employees)
+            {
+                <tr scope="row">
+                    <td>@employee.EmployeeId</td>
+                    <td>@employee.EmployeeName</td>
+                    <td>@employee.EmployeeContractType</td>
+                    <td>@employee.EmployeeRoleId</td>
+                    <td>@employee.EmployeeName</td>
+                    <td>@employee.EmployeeRoleDescription</td>
+                    <td>@string.Format(new CultureInfo("en-US"), "{0:C2}", employee.EmployeeHourlySalary)</td>
+                    <td>@string.Format(new CultureInfo("en-US"), "{0:C2}", employee.EmployeeMonthlySalary)</td>
+                    <td>@string.Format(new CultureInfo("en-US"), "{0:C2}", employee.AnnualSalary)</td>
+                </tr>
+            }
+            </tbody>
+
+        </table>
+    </div>
+}

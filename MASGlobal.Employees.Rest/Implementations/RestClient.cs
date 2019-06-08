@@ -14,7 +14,7 @@ namespace MASGlobal.Employees.Rest.Implementations
     {
         public async Task<TResult> ExecutePostResultAsync<TResult>(RestClientRequest requestInfo)
         {
-            var restClient = GetRestClient(true, requestInfo);
+            var restClient = GetRestClient(false, requestInfo);
             var request = GetRequest(Method.POST, requestInfo);
 
             var restResponse = await ExecutePostWithResponseOrExceptionRetryPolicy<TResult>(restClient, request, 3, 1)
@@ -28,7 +28,7 @@ namespace MASGlobal.Employees.Rest.Implementations
 
         public async Task<TResult> ExecuteGetResultAsync<TResult>(RestClientRequest requestInfo)
         {
-            var restClient = GetRestClient(true, requestInfo);
+            var restClient = GetRestClient(false, requestInfo);
             var request = GetRequest(Method.GET, requestInfo);
 
             var restResponse =

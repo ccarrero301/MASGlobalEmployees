@@ -4,8 +4,9 @@ namespace MASGlobal.Employees.Rest.Entities
 {
     public sealed class RestClientRequest
     {
-        public RestClientRequest(string baseUri, string resource, IDictionary<string, string> headerParameters,
-            IDictionary<string, string> queryParameters, IDictionary<string, string> uriSegments, string bodyAsJson)
+        public RestClientRequest(string baseUri, string resource, IDictionary<string, string> headerParameters = null,
+            IDictionary<string, string> queryParameters = null, IDictionary<string, string> uriSegments = null,
+            string bodyAsJson = null)
         {
             BaseUri = baseUri;
             Resource = resource;

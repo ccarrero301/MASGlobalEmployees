@@ -88,9 +88,11 @@ namespace MASGlobal.Employees.Rest.Implementations
 
         private static RestSharp.IRestClient GetRestClient(bool useHttp, RestClientRequest requestInfo)
         {
-            var transferProtocol = useHttp ? "Http" : "Https";
+            var transferProtocol = useHttp ? "http://" : "https://";
 
-            return new RestSharp.RestClient($"{transferProtocol}{requestInfo.BaseUri}");
+            var baseUri = $"{transferProtocol}{requestInfo.BaseUri}";
+
+            return new RestSharp.RestClient(baseUri);
         }
 
         private static IRestRequest GetRequest(Method method, RestClientRequest requestInfo, int timeout = 3600000)

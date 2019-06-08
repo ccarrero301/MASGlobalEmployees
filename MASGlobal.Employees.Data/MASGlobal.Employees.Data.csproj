@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,7 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MASGlobal.Employees.Domain\MASGlobal.Employees.Domain.csproj" />
+    <ProjectReference Include="..\MASGlobal.Employees.DTOs\MASGlobal.Employees.DTOs.csproj" />
     <ProjectReference Include="..\MASGlobal.Employees.Patterns\MASGlobal.Employees.Patterns.csproj" />
     <ProjectReference Include="..\MASGlobal.Employees.Rest\MASGlobal.Employees.Rest.csproj" />
   </ItemGroup>

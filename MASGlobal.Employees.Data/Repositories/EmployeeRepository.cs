@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using MASGlobal.Employees.Data.Contracts;
 using MASGlobal.Employees.Domain;
 using MASGlobal.Employees.Rest.Contracts;
@@ -10,18 +11,25 @@ namespace MASGlobal.Employees.Data.Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
     {
+        private readonly IMapper _mapper;
         private readonly IRestClient _restClient;
 
-        public EmployeeRepository(IRestClient restClient)
+        public EmployeeRepository(IRestClient restClient, IMapper mapper)
         {
             _restClient = restClient;
+            _mapper = mapper;
         }
 
-        public Task<IEnumerable<Employee>> GetAllEmployees()
+        public async Task<IEnumerable<Employee>> GetAllEmployees()
         {
             var employeesEndpointRequest = GetEmployeesEndpointRequest();
 
-            return _restClient.ExecuteGetResultAsync<IEnumerable<Employee>>(employeesEndpointRequest);
+            var dtoEmployeeList =
+                await _restClient.ExecuteGetResultAsync<IEnumerable<DTOs.Employee>>(employeesEndpointRequest);
+
+            var domainEmployeeList = _mapper.Map<IEnumerable<DTOs.Employee>, IEnumerable<Employee>>(dtoEmployeeList);
+
+            return domainEmployeeList;
         }
 
         public Task<Employee> GetEmployeesById(int employeeId)
@@ -30,6 +38,7 @@ namespace MASGlobal.Employees.Data.Repositories
         }
 
         private static RestClientRequest GetEmployeesEndpointRequest() =>
-            new RestClientRequest("", "", null, null, null, null);
+            new RestClientRequest("masglobaltestapi.azurewebsites.net/api/", "Employees", null, null, null,
+                null);
     }
 }

@@ -1,18 +1,22 @@
-﻿using AutoMapper;
-using MASGlobal.Employees.DTOs;
+﻿using System;
+using AutoMapper;
+using MASGlobal.Employees.Domain.Entities;
+using EmployeeDto = MASGlobal.Employees.DTOs.Entities.Employee;
 
 namespace MASGlobal.Employees.WebApi.Mappings
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile()
-        {
-            CreateMap<Employee, Domain.Employee>()
-                .ConstructUsing(source => new Domain.Employee(source.Id, source.Name));
+        public MappingProfile() => CreateMap<EmployeeDto, Employee>().ConstructUsing(source =>
+            new Employee(source.EmployeeId, source.EmployeeName,
+                new EmployeeRole(source.EmployeeRoleId, source.EmployeeRoleName, source.EmployeeRoleDescription),
+                ConstructEmployeeContractType(source.EmployeeContractType)));
 
-            CreateMap<Domain.Employee, Employee>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.EmployeeId))
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.EmployeeName));
+        private static EmployeeContractType ConstructEmployeeContractType(string enumCandidate)
+        {
+            Enum.TryParse(enumCandidate, true, out EmployeeContractType employeeContractTypeResult);
+
+            return employeeContractTypeResult;
         }
     }
 }

@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace MASGlobal.Employees.WebApi
@@ -51,9 +53,13 @@ namespace MASGlobal.Employees.WebApi
                 options.CustomSchemaIds(type => type.FullName);
             });
 
-            services.AddMvc();
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                    //options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

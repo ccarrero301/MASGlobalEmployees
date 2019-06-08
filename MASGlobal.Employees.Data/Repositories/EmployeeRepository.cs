@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using MASGlobal.Employees.Data.Contracts;
-using MASGlobal.Employees.Domain;
+using MASGlobal.Employees.Domain.Entities;
 using MASGlobal.Employees.Rest.Contracts;
 using MASGlobal.Employees.Rest.Entities;
 
@@ -25,10 +25,10 @@ namespace MASGlobal.Employees.Data.Repositories
             var employeesEndpointRequest = GetEmployeesEndpointRequest();
 
             var dtoEmployeeList =
-                await _restClient.ExecuteGetResultAsync<IEnumerable<DTOs.Employee>>(employeesEndpointRequest)
+                await _restClient.ExecuteGetResultAsync<IEnumerable<DTOs.Entities.Employee>>(employeesEndpointRequest)
                     .ConfigureAwait(false);
 
-            var domainEmployeeList = _mapper.Map<IEnumerable<DTOs.Employee>, IEnumerable<Employee>>(dtoEmployeeList);
+            var domainEmployeeList = _mapper.Map<IEnumerable<DTOs.Entities.Employee>, IEnumerable<Employee>>(dtoEmployeeList);
 
             return domainEmployeeList;
         }

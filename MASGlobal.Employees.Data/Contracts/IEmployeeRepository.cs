@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using MASGlobal.Employees.Domain;
+using MASGlobal.Employees.Domain.Entities;
 
 namespace MASGlobal.Employees.Data.Contracts
 {

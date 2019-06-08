@@ -17,7 +17,7 @@ namespace MASGlobal.Employees.Rest.Implementations
             var restClient = GetRestClient(true, requestInfo);
             var request = GetRequest(Method.POST, requestInfo);
 
-            var restResponse = await ExecutePostWithResponseOrExceptionRetryPolicy<TResult>(restClient, request, 3, 1);
+            var restResponse = await ExecutePostWithResponseOrExceptionRetryPolicy<TResult>(restClient, request, 3, 1).ConfigureAwait(false);
 
             if (restResponse.IsSuccessful)
                 return JsonConvert.DeserializeObject<TResult>(restResponse.Content);
@@ -30,7 +30,7 @@ namespace MASGlobal.Employees.Rest.Implementations
             var restClient = GetRestClient(true, requestInfo);
             var request = GetRequest(Method.GET, requestInfo);
 
-            var restResponse = await ExecuteGetWithResponseOrExceptionRetryPolicy<TResult>(restClient, request, 3, 1);
+            var restResponse = await ExecuteGetWithResponseOrExceptionRetryPolicyAsync<TResult>(restClient, request, 3, 1).ConfigureAwait(false);
 
             if (restResponse.IsSuccessful)
                 return JsonConvert.DeserializeObject<TResult>(restResponse.Content);
@@ -38,7 +38,7 @@ namespace MASGlobal.Employees.Rest.Implementations
             throw new Exception(GetResponseErrorMessage(restResponse));
         }
 
-        private static async Task<IRestResponse<TResult>> ExecutePostWithResponseOrExceptionRetryPolicy<TResult>(
+        private static Task<IRestResponse<TResult>> ExecutePostWithResponseOrExceptionRetryPolicy<TResult>(
             RestSharp.IRestClient restClient,
             IRestRequest request, int maxRetryAttempts, int retryFactor)
         {
@@ -51,7 +51,7 @@ namespace MASGlobal.Employees.Rest.Implementations
                 HttpStatusCode.GatewayTimeout // 504
             };
 
-            return await Policy
+            return Policy
                 .Handle<Exception>()
                 .OrResult<IRestResponse<TResult>>(restSharpResponse =>
                     httpStatusCodesWorthRetrying.Contains(restSharpResponse.StatusCode))
@@ -62,7 +62,7 @@ namespace MASGlobal.Employees.Rest.Implementations
                 .ExecuteAsync(() => restClient.ExecutePostTaskAsync<TResult>(request));
         }
 
-        private static async Task<IRestResponse<TResult>> ExecuteGetWithResponseOrExceptionRetryPolicy<TResult>(
+        private static Task<IRestResponse<TResult>> ExecuteGetWithResponseOrExceptionRetryPolicyAsync<TResult>(
             RestSharp.IRestClient restClient,
             IRestRequest request, int maxRetryAttempts, int retryFactor)
         {
@@ -75,7 +75,7 @@ namespace MASGlobal.Employees.Rest.Implementations
                 HttpStatusCode.GatewayTimeout // 504
             };
 
-            return await Policy
+            return Policy
                 .Handle<Exception>()
                 .OrResult<IRestResponse<TResult>>(restSharpResponse =>
                     httpStatusCodesWorthRetrying.Contains(restSharpResponse.StatusCode))

@@ -8,8 +8,7 @@ namespace MASGlobal.Employees.WebApi.Mappings
         public MappingProfile()
         {
             CreateMap<Employee, Domain.Employee>()
-                .ForMember(dest => dest.EmployeeId, opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.EmployeeName, opt => opt.MapFrom(src => src.Name));
+                .ConstructUsing(source => new Domain.Employee(source.Id, source.Name));
 
             CreateMap<Domain.Employee, Employee>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.EmployeeId))

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using MASGlobal.Employees.Patterns.Specification.Contracts;
-using MASGlobal.Employees.Patterns.Specification.Implementations;
 
 namespace MASGlobal.Employees.Patterns.Specification.Base
 {

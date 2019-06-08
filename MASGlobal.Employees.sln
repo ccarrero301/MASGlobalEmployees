@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MASGlobal.Employees.Data", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MASGlobal.Employees.Domain", "MASGlobal.Employees.Domain\MASGlobal.Employees.Domain.csproj", "{A8DA1ADC-472D-4E8E-AA60-3C9E88B49D4E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MASGlobal.Employees.Rest", "MASGlobal.Employees.Rest\MASGlobal.Employees.Rest.csproj", "{0E8CC4D5-880C-4DDC-B2FD-9FF48EB145E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{A8DA1ADC-472D-4E8E-AA60-3C9E88B49D4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8DA1ADC-472D-4E8E-AA60-3C9E88B49D4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8DA1ADC-472D-4E8E-AA60-3C9E88B49D4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E8CC4D5-880C-4DDC-B2FD-9FF48EB145E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E8CC4D5-880C-4DDC-B2FD-9FF48EB145E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E8CC4D5-880C-4DDC-B2FD-9FF48EB145E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E8CC4D5-880C-4DDC-B2FD-9FF48EB145E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

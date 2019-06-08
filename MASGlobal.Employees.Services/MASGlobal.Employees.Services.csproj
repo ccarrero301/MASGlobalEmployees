@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Factories\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MASGlobal.Employees.Data\MASGlobal.Employees.Data.csproj" />
   </ItemGroup>
 

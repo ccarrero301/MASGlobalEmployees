@@ -19,9 +19,9 @@ namespace MASGlobal.Employees.WebApi.Controllers
         [Route("all")]
         public async Task<ActionResult> GetEmployees()
         {
-            await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
+            var serviceDtoEmployees = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
 
-            return Ok("OK");
+            return Ok(serviceDtoEmployees);
         }
     }
 }

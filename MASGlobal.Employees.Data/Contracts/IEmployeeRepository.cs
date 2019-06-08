@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MASGlobal.Employees.Domain;
 
 namespace MASGlobal.Employees.Data.Contracts
 {
     public interface IEmployeeRepository
     {
-        IEnumerable<Employee> GetAllEmployees();
+        Task<IEnumerable<Employee>> GetAllEmployees();
 
-        Employee GetEmployeesById(int employeeId);
+        Task<Employee> GetEmployeesById(int employeeId);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace MASGlobal.Employees.Rest.Entities
 {
-    internal sealed class RestClientRequest
+    public sealed class RestClientRequest
     {
         public RestClientRequest(string baseUri, string resource, IDictionary<string, string> headerParameters,
             IDictionary<string, string> queryParameters, IDictionary<string, string> uriSegments, string bodyAsJson)

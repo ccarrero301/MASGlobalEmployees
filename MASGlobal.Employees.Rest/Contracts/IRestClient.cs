@@ -3,8 +3,10 @@ using MASGlobal.Employees.Rest.Entities;
 
 namespace MASGlobal.Employees.Rest.Contracts
 {
-    internal interface IRestClient
+    public interface IRestClient
     {
+        Task<TResult> ExecuteGetResultAsync<TResult>(RestClientRequest requestInfo);
+
         Task<TResult> ExecutePostResultAsync<TResult>(RestClientRequest requestInfo);
     }
 }

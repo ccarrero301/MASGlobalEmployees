@@ -10,7 +10,7 @@ using IRestClient = MASGlobal.Employees.Rest.Contracts.IRestClient;
 
 namespace MASGlobal.Employees.Rest.Implementations
 {
-    internal sealed class RestClient : IRestClient
+    public sealed class RestClient : IRestClient
     {
         public async Task<TResult> ExecutePostResultAsync<TResult>(RestClientRequest requestInfo)
         {
@@ -18,6 +18,19 @@ namespace MASGlobal.Employees.Rest.Implementations
             var request = GetRequest(Method.POST, requestInfo);
 
             var restResponse = await ExecutePostWithResponseOrExceptionRetryPolicy<TResult>(restClient, request, 3, 1);
+
+            if (restResponse.IsSuccessful)
+                return JsonConvert.DeserializeObject<TResult>(restResponse.Content);
+
+            throw new Exception(GetResponseErrorMessage(restResponse));
+        }
+
+        public async Task<TResult> ExecuteGetResultAsync<TResult>(RestClientRequest requestInfo)
+        {
+            var restClient = GetRestClient(true, requestInfo);
+            var request = GetRequest(Method.GET, requestInfo);
+
+            var restResponse = await ExecuteGetWithResponseOrExceptionRetryPolicy<TResult>(restClient, request, 3, 1);
 
             if (restResponse.IsSuccessful)
                 return JsonConvert.DeserializeObject<TResult>(restResponse.Content);
@@ -47,6 +60,30 @@ namespace MASGlobal.Employees.Rest.Implementations
                     retryAttempt => TimeSpan.FromSeconds(Math.Pow(retryFactor, retryAttempt)),
                     (exception, timeSpan, retryCount, context) => { })
                 .ExecuteAsync(() => restClient.ExecutePostTaskAsync<TResult>(request));
+        }
+
+        private static async Task<IRestResponse<TResult>> ExecuteGetWithResponseOrExceptionRetryPolicy<TResult>(
+            RestSharp.IRestClient restClient,
+            IRestRequest request, int maxRetryAttempts, int retryFactor)
+        {
+            HttpStatusCode[] httpStatusCodesWorthRetrying =
+            {
+                HttpStatusCode.RequestTimeout, // 408
+                HttpStatusCode.InternalServerError, // 500
+                HttpStatusCode.BadGateway, // 502
+                HttpStatusCode.ServiceUnavailable, // 503
+                HttpStatusCode.GatewayTimeout // 504
+            };
+
+            return await Policy
+                .Handle<Exception>()
+                .OrResult<IRestResponse<TResult>>(restSharpResponse =>
+                    httpStatusCodesWorthRetrying.Contains(restSharpResponse.StatusCode))
+                .WaitAndRetryAsync(
+                    maxRetryAttempts,
+                    retryAttempt => TimeSpan.FromSeconds(Math.Pow(retryFactor, retryAttempt)),
+                    (exception, timeSpan, retryCount, context) => { })
+                .ExecuteAsync(() => restClient.ExecuteGetTaskAsync<TResult>(request));
         }
 
         private static RestSharp.IRestClient GetRestClient(bool useHttp, RestClientRequest requestInfo)

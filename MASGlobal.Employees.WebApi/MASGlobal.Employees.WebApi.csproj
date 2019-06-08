@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MASGlobal.Employees.Domain\MASGlobal.Employees.Domain.csproj" />
-    <ProjectReference Include="..\MASGlobal.Employees.DTOs\MASGlobal.Employees.DTOs.csproj" />
     <ProjectReference Include="..\MASGlobal.Employees.Services\MASGlobal.Employees.Services.csproj" />
   </ItemGroup>
 

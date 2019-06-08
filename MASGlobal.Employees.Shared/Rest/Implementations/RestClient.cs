@@ -2,22 +2,21 @@
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using MASGlobal.Employees.Rest.Entities;
+using MASGlobal.Employees.Shared.Rest.Entities;
 using Newtonsoft.Json;
 using Polly;
 using RestSharp;
-using IRestClient = MASGlobal.Employees.Rest.Contracts.IRestClient;
 
-namespace MASGlobal.Employees.Rest.Implementations
+namespace MASGlobal.Employees.Shared.Rest.Implementations
 {
-    public sealed class RestClient : IRestClient
+    public sealed class RestClient : Shared.Rest.Contracts.IRestClient
     {
         public async Task<TResult> ExecutePostResultAsync<TResult>(RestClientRequest requestInfo)
         {
             var restClient = GetRestClient(false, requestInfo);
             var request = GetRequest(Method.POST, requestInfo);
 
-            var restResponse = await ExecutePostWithResponseOrExceptionRetryPolicy<TResult>(restClient, request, 3, 1)
+            var restResponse = await ExecutePostWithResponseOrExceptionRetryPolicyAsync<TResult>(restClient, request, 3, 1)
                 .ConfigureAwait(false);
 
             if (restResponse.IsSuccessful)
@@ -41,8 +40,8 @@ namespace MASGlobal.Employees.Rest.Implementations
             throw new Exception(GetResponseErrorMessage(restResponse));
         }
 
-        private static Task<IRestResponse<TResult>> ExecutePostWithResponseOrExceptionRetryPolicy<TResult>(
-            RestSharp.IRestClient restClient,
+        private static Task<IRestResponse<TResult>> ExecutePostWithResponseOrExceptionRetryPolicyAsync<TResult>(
+            IRestClient restClient,
             IRestRequest request, int maxRetryAttempts, int retryFactor)
         {
             HttpStatusCode[] httpStatusCodesWorthRetrying =
@@ -66,7 +65,7 @@ namespace MASGlobal.Employees.Rest.Implementations
         }
 
         private static Task<IRestResponse<TResult>> ExecuteGetWithResponseOrExceptionRetryPolicyAsync<TResult>(
-            RestSharp.IRestClient restClient,
+            IRestClient restClient,
             IRestRequest request, int maxRetryAttempts, int retryFactor)
         {
             HttpStatusCode[] httpStatusCodesWorthRetrying =
@@ -89,7 +88,7 @@ namespace MASGlobal.Employees.Rest.Implementations
                 .ExecuteAsync(() => restClient.ExecuteGetTaskAsync<TResult>(request));
         }
 
-        private static RestSharp.IRestClient GetRestClient(bool useHttp, RestClientRequest requestInfo)
+        private static IRestClient GetRestClient(bool useHttp, RestClientRequest requestInfo)
         {
             var transferProtocol = useHttp ? "http://" : "https://";
 

@@ -1,6 +1,6 @@
-﻿using MASGlobal.Employees.Patterns.Specification.Base;
+﻿using MASGlobal.Employees.Shared.Patterns.Specification.Base;
 
-namespace MASGlobal.Employees.Patterns.Specification.Implementations
+namespace MASGlobal.Employees.Shared.Patterns.Specification.Implementations
 {
     internal sealed class AllSpecification<TEntity> : CompositeSpecification<TEntity>
     {

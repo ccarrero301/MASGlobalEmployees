@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using MASGlobal.Employees.DTOs.Services;
+using MASGlobal.Employees.Shared.DTOs.Services;
 
 namespace MASGlobal.Employees.Services.Contracts
 {

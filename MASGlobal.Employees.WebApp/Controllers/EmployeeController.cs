@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using MASGlobal.Employees.DTOs.Services;
-using MASGlobal.Employees.Rest.Contracts;
-using MASGlobal.Employees.Rest.Entities;
+using MASGlobal.Employees.Shared.DTOs.Services;
+using MASGlobal.Employees.Shared.Rest.Contracts;
+using MASGlobal.Employees.Shared.Rest.Entities;
 using MASGlobal.Employees.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -51,8 +51,6 @@ namespace MASGlobal.Employees.WebApp.Controllers
 
         private async Task<IEnumerable<Employee>> GetEmployeesList(int employeeId)
         {
-            var employees = new List<Employee>();
-
             const string baseUri = "localhost:44344/api/";
             const string allEmployeesResource = "Employee/all";
             const string singleEmployeeResource = "Employee/{employeeId}";
@@ -76,7 +74,6 @@ namespace MASGlobal.Employees.WebApp.Controllers
 
             var serviceEmployeesDto =
                 await _restClient.ExecuteGetResultAsync<Employee>(request).ConfigureAwait(false);
-
 
             var singleEmployeeList = new List<Employee> {serviceEmployeesDto};
 

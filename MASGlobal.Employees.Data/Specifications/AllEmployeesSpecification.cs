@@ -1,5 +1,5 @@
-﻿using MASGlobal.Employees.DTOs.Data;
-using MASGlobal.Employees.Patterns.Specification.Base;
+﻿using MASGlobal.Employees.Shared.DTOs.Data;
+using MASGlobal.Employees.Shared.Patterns.Specification.Base;
 
 namespace MASGlobal.Employees.Data.Specifications
 {

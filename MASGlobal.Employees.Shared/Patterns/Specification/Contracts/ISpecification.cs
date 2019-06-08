@@ -1,4 +1,4 @@
-﻿namespace MASGlobal.Employees.Patterns.Specification.Contracts
+﻿namespace MASGlobal.Employees.Shared.Patterns.Specification.Contracts
 {
     public interface ISpecification<TEntity>
     {

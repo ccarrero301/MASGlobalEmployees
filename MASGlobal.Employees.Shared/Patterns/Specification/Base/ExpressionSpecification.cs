@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace MASGlobal.Employees.Patterns.Specification.Base
+namespace MASGlobal.Employees.Shared.Patterns.Specification.Base
 {
     public abstract class ExpressionSpecification<TEntity> : CompositeSpecification<TEntity>
     {

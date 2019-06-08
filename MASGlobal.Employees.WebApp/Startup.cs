@@ -1,5 +1,5 @@
-﻿using MASGlobal.Employees.Rest.Contracts;
-using MASGlobal.Employees.Rest.Implementations;
+﻿using MASGlobal.Employees.Shared.Rest.Contracts;
+using MASGlobal.Employees.Shared.Rest.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

@@ -2,8 +2,8 @@
 using AutoMapper;
 using MASGlobal.Employees.Domain.Entities;
 using MASGlobal.Employees.Services.Factories.AbstractEmployees;
-using EmployeeDataDto = MASGlobal.Employees.DTOs.Data.Employee;
-using EmployeeServiceDto = MASGlobal.Employees.DTOs.Services.Employee;
+using EmployeeDataDto = MASGlobal.Employees.Shared.DTOs.Data.Employee;
+using EmployeeServiceDto = MASGlobal.Employees.Shared.DTOs.Services.Employee;
 
 namespace MASGlobal.Employees.WebApi.Mappings
 {

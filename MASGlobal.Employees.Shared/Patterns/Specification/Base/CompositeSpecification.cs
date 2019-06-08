@@ -1,7 +1,7 @@
-﻿using MASGlobal.Employees.Patterns.Specification.Contracts;
-using MASGlobal.Employees.Patterns.Specification.Implementations;
+﻿using MASGlobal.Employees.Shared.Patterns.Specification.Contracts;
+using MASGlobal.Employees.Shared.Patterns.Specification.Implementations;
 
-namespace MASGlobal.Employees.Patterns.Specification.Base
+namespace MASGlobal.Employees.Shared.Patterns.Specification.Base
 {
     public abstract class CompositeSpecification<TEntity> : ISpecification<TEntity>
     {

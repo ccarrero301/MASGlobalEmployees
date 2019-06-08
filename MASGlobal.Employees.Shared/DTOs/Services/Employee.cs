@@ -1,4 +1,4 @@
-﻿namespace MASGlobal.Employees.DTOs.Services
+﻿namespace MASGlobal.Employees.Shared.DTOs.Services
 {
     public class Employee
     {

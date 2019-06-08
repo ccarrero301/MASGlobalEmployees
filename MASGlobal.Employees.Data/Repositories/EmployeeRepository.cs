@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MASGlobal.Employees.Data.Contracts;
 using MASGlobal.Employees.Data.Specifications;
-using MASGlobal.Employees.Rest.Contracts;
-using MASGlobal.Employees.Rest.Entities;
-using DataDtoEmployee = MASGlobal.Employees.DTOs.Data.Employee;
+using MASGlobal.Employees.Shared.Rest.Contracts;
+using MASGlobal.Employees.Shared.Rest.Entities;
+using DataDtoEmployee = MASGlobal.Employees.Shared.DTOs.Data.Employee;
 using DomainEmployee = MASGlobal.Employees.Domain.Entities.Employee;
 
 namespace MASGlobal.Employees.Data.Repositories

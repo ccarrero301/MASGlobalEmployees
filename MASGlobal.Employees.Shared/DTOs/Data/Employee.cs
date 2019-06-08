@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace MASGlobal.Employees.DTOs.Data
+namespace MASGlobal.Employees.Shared.DTOs.Data
 {
     public class Employee
     {

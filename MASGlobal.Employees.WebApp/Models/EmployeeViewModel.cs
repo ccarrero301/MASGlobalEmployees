@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using MASGlobal.Employees.DTOs.Services;
+using MASGlobal.Employees.Shared.DTOs.Services;
 
 namespace MASGlobal.Employees.WebApp.Models
 {

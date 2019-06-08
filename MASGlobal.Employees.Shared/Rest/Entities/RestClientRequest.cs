@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MASGlobal.Employees.Rest.Entities
+namespace MASGlobal.Employees.Shared.Rest.Entities
 {
     public sealed class RestClientRequest
     {

@@ -9,7 +9,7 @@ using MASGlobal.Employees.Services.Contracts;
 using MASGlobal.Employees.Services.Factories.AbstractCreators;
 using MASGlobal.Employees.Services.Factories.AbstractEmployees;
 using MASGlobal.Employees.Services.Factories.ConcreteCreators;
-using ServiceDtoEmployee = MASGlobal.Employees.DTOs.Services.Employee;
+using ServiceDtoEmployee = MASGlobal.Employees.Shared.DTOs.Services.Employee;
 
 namespace MASGlobal.Employees.Services.Implementations
 {

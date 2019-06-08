@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using MASGlobal.Employees.Rest.Entities;
+using MASGlobal.Employees.Shared.Rest.Entities;
 
-namespace MASGlobal.Employees.Rest.Contracts
+namespace MASGlobal.Employees.Shared.Rest.Contracts
 {
     public interface IRestClient
     {

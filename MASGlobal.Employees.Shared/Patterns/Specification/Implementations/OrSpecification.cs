@@ -1,7 +1,7 @@
-﻿using MASGlobal.Employees.Patterns.Specification.Base;
-using MASGlobal.Employees.Patterns.Specification.Contracts;
+﻿using MASGlobal.Employees.Shared.Patterns.Specification.Base;
+using MASGlobal.Employees.Shared.Patterns.Specification.Contracts;
 
-namespace MASGlobal.Employees.Patterns.Specification.Implementations
+namespace MASGlobal.Employees.Shared.Patterns.Specification.Implementations
 {
     internal sealed class OrSpecification<TEntity> : CompositeSpecification<TEntity>
     {

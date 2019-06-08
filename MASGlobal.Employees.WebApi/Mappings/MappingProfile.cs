@@ -23,11 +23,11 @@ namespace MASGlobal.Employees.WebApi.Mappings
                 .ForMember(dest => dest.EmployeeContractType, opt => opt.MapFrom(src => src.EmployeeContractType))
                 .ForMember(dest => dest.EmployeeRoleId, opt => opt.MapFrom(src => src.EmployeeRole.EmployeeRoleId))
                 .ForMember(dest => dest.EmployeeRoleName, opt => opt.MapFrom(src => src.EmployeeRole.EmployeeRoleName))
-                .ForMember(dest => dest.EmployeeRoleDescription, opt => opt.MapFrom(src => src.EmployeeRole.EmployeeRoleDescription))
+                .ForMember(dest => dest.EmployeeRoleDescription,
+                    opt => opt.MapFrom(src => src.EmployeeRole.EmployeeRoleDescription))
                 .ForMember(dest => dest.EmployeeHourlySalary, opt => opt.MapFrom(src => src.HourlySalary))
                 .ForMember(dest => dest.EmployeeMonthlySalary, opt => opt.MapFrom(src => src.MonthlySalary))
                 .ForMember(dest => dest.AnnualSalary, opt => opt.MapFrom(src => src.AnnualSalary));
-
         }
 
         private static EmployeeContractType ConstructEmployeeContractType(string enumCandidate)

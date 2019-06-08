@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MASGlobal.Employees.Data.Contracts;
 using MASGlobal.Employees.Data.Specifications;
-using MASGlobal.Employees.Domain.Entities;
 using MASGlobal.Employees.Rest.Contracts;
 using MASGlobal.Employees.Rest.Entities;
 using DataDtoEmployee = MASGlobal.Employees.DTOs.Data.Employee;
@@ -31,13 +30,14 @@ namespace MASGlobal.Employees.Data.Repositories
 
             var dataDtoEmployeeListFiltered = dataDtoEmployeeList.Where(allEmployeesSpecification.IsSatisfiedBy);
 
-            var domainEmployeeList = _mapper.Map<IEnumerable<DataDtoEmployee>, IEnumerable<DomainEmployee>>(dataDtoEmployeeListFiltered);
+            var domainEmployeeList =
+                _mapper.Map<IEnumerable<DataDtoEmployee>, IEnumerable<DomainEmployee>>(dataDtoEmployeeListFiltered);
 
             return domainEmployeeList;
         }
 
 
-        public async Task<Employee> GetEmployeesByIdAsync(int employeeId)
+        public async Task<DomainEmployee> GetEmployeesByIdAsync(int employeeId)
         {
             var employeeByIdSpecification = new EmployeeByIdSpecification(employeeId);
 
@@ -55,7 +55,7 @@ namespace MASGlobal.Employees.Data.Repositories
             var employeesEndpointRequest = GetEmployeesEndpointRequest();
 
             var dtoEmployeeList =
-                await _restClient.ExecuteGetResultAsync<IEnumerable<DTOs.Data.Employee>>(employeesEndpointRequest)
+                await _restClient.ExecuteGetResultAsync<IEnumerable<DataDtoEmployee>>(employeesEndpointRequest)
                     .ConfigureAwait(false);
             return dtoEmployeeList;
         }

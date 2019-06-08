@@ -1,4 +1,4 @@
-﻿using MASGlobal.Employees.Domain.Entities;
+﻿using MASGlobal.Employees.DTOs.Data;
 using MASGlobal.Employees.Patterns.Specification.Base;
 
 namespace MASGlobal.Employees.Data.Specifications

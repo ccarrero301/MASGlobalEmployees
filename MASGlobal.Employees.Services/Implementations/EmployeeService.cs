@@ -33,9 +33,13 @@ namespace MASGlobal.Employees.Services.Implementations
             return serviceEmployeesDtoList;
         }
 
-        public async Task GetEmployeeByIdAsync(int employeeId)
+        public async Task<ServiceDtoEmployee> GetEmployeeByIdAsync(int employeeId)
         {
             var domainEmployee = await _employeeRepository.GetEmployeesByIdAsync(employeeId).ConfigureAwait(false);
+
+            var serviceEmployeeDto = GetEmployee(domainEmployee);
+
+            return serviceEmployeeDto;
         }
 
         private ServiceDtoEmployee GetEmployee(Employee domainEmployee)

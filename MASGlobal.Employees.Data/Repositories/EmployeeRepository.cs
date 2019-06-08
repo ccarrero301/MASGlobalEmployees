@@ -25,7 +25,8 @@ namespace MASGlobal.Employees.Data.Repositories
             var employeesEndpointRequest = GetEmployeesEndpointRequest();
 
             var dtoEmployeeList =
-                await _restClient.ExecuteGetResultAsync<IEnumerable<DTOs.Employee>>(employeesEndpointRequest).ConfigureAwait(false);
+                await _restClient.ExecuteGetResultAsync<IEnumerable<DTOs.Employee>>(employeesEndpointRequest)
+                    .ConfigureAwait(false);
 
             var domainEmployeeList = _mapper.Map<IEnumerable<DTOs.Employee>, IEnumerable<Employee>>(dtoEmployeeList);
 

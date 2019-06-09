@@ -2,8 +2,9 @@
 using AutoMapper;
 using MASGlobal.Employees.Domain.Entities;
 using MASGlobal.Employees.Services.Factories.AbstractEmployees;
-using EmployeeDataDto = MASGlobal.Employees.Shared.DTOs.Data.Employee;
-using EmployeeServiceDto = MASGlobal.Employees.Shared.DTOs.Services.Employee;
+using DomainEmployee = MASGlobal.Employees.Domain.Entities.Employee;
+using DataEmployeeDto = MASGlobal.Employees.Shared.DTOs.Data.Employee;
+using ServiceEmployeeDto = MASGlobal.Employees.Shared.DTOs.Services.Employee;
 
 namespace MASGlobal.Employees.WebApi.Mappings
 {
@@ -11,16 +12,17 @@ namespace MASGlobal.Employees.WebApi.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<EmployeeDataDto, Employee>().ConstructUsing(source => new Employee(source.EmployeeId,
+            CreateMap<DataEmployeeDto, DomainEmployee>().ConstructUsing(source => new DomainEmployee(source.EmployeeId,
                 source.EmployeeName,
                 new EmployeeRole(source.EmployeeRoleId, source.EmployeeRoleName, source.EmployeeRoleDescription),
-                ConstructEmployeeContractType(source.EmployeeContractType),
+                ConstructDomainEmployeeContractType(source.EmployeeContractType),
                 Convert.ToDouble(source.EmployeeHourlySalary), Convert.ToDouble(source.EmployeeMonthlySalary)));
 
-            CreateMap<AnnualSalaryEmployee, EmployeeServiceDto>()
+            CreateMap<AnnualSalaryEmployee, ServiceEmployeeDto>()
                 .ForMember(dest => dest.EmployeeId, opt => opt.MapFrom(src => src.EmployeeId))
                 .ForMember(dest => dest.EmployeeName, opt => opt.MapFrom(src => src.EmployeeName))
-                .ForMember(dest => dest.EmployeeContractType, opt => opt.MapFrom(src => src.EmployeeContractType))
+                .ForMember(dest => dest.EmployeeContractType,
+                    opt => opt.MapFrom(src => ConstructServiceDtoEmployeeContractType(src.EmployeeContractType)))
                 .ForMember(dest => dest.EmployeeRoleId, opt => opt.MapFrom(src => src.EmployeeRole.EmployeeRoleId))
                 .ForMember(dest => dest.EmployeeRoleName, opt => opt.MapFrom(src => src.EmployeeRole.EmployeeRoleName))
                 .ForMember(dest => dest.EmployeeRoleDescription,
@@ -30,11 +32,26 @@ namespace MASGlobal.Employees.WebApi.Mappings
                 .ForMember(dest => dest.AnnualSalary, opt => opt.MapFrom(src => src.AnnualSalary));
         }
 
-        private static EmployeeContractType ConstructEmployeeContractType(string enumCandidate)
+        private static EmployeeContractType ConstructDomainEmployeeContractType(string enumCandidate)
         {
             Enum.TryParse(enumCandidate, true, out EmployeeContractType employeeContractTypeResult);
 
             return employeeContractTypeResult;
+        }
+
+        private static string ConstructServiceDtoEmployeeContractType(EmployeeContractType employeeContractType)
+        {
+            switch (employeeContractType)
+            {
+                case EmployeeContractType.NotDefined:
+                    return "Not defined";
+                case EmployeeContractType.HourlySalaryEmployee:
+                    return "Hourly Salary Employee";
+                case EmployeeContractType.MonthlySalaryEmployee:
+                    return "Monthly Salary Employee";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(employeeContractType), employeeContractType, null);
+            }
         }
     }
 }

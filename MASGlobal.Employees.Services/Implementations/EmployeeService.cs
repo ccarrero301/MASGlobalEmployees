@@ -9,7 +9,7 @@ using MASGlobal.Employees.Services.Contracts;
 using MASGlobal.Employees.Services.Factories.AbstractCreators;
 using MASGlobal.Employees.Services.Factories.AbstractEmployees;
 using MASGlobal.Employees.Services.Factories.ConcreteCreators;
-using ServiceDtoEmployee = MASGlobal.Employees.Shared.DTOs.Services.Employee;
+using ServiceEmployeeDto = MASGlobal.Employees.Shared.DTOs.Services.Employee;
 
 namespace MASGlobal.Employees.Services.Implementations
 {
@@ -24,7 +24,7 @@ namespace MASGlobal.Employees.Services.Implementations
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ServiceDtoEmployee>> GetEmployeesAsync()
+        public async Task<IEnumerable<ServiceEmployeeDto>> GetEmployeesAsync()
         {
             var allDomainEmployees = await _employeeRepository.GetAllEmployeesAsync().ConfigureAwait(false);
 
@@ -33,7 +33,7 @@ namespace MASGlobal.Employees.Services.Implementations
             return serviceEmployeesDtoList;
         }
 
-        public async Task<ServiceDtoEmployee> GetEmployeeByIdAsync(int employeeId)
+        public async Task<ServiceEmployeeDto> GetEmployeeByIdAsync(int employeeId)
         {
             var domainEmployee = await _employeeRepository.GetEmployeesByIdAsync(employeeId).ConfigureAwait(false);
 
@@ -42,7 +42,7 @@ namespace MASGlobal.Employees.Services.Implementations
             return serviceEmployeeDto;
         }
 
-        private ServiceDtoEmployee GetEmployee(Employee domainEmployee)
+        private ServiceEmployeeDto GetEmployee(Employee domainEmployee)
         {
             IEmployeeContractFactory employeeContractFactory;
 
@@ -69,7 +69,7 @@ namespace MASGlobal.Employees.Services.Implementations
 
             var annualSalaryEmployee = employeeContractFactory.GetEmployee();
 
-            var serviceDtoEmployee = _mapper.Map<AnnualSalaryEmployee, ServiceDtoEmployee>(annualSalaryEmployee);
+            var serviceDtoEmployee = _mapper.Map<AnnualSalaryEmployee, ServiceEmployeeDto>(annualSalaryEmployee);
 
             return serviceDtoEmployee;
         }

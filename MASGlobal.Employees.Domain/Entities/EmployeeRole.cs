@@ -10,7 +10,9 @@
         }
 
         public int EmployeeRoleId { get; }
+
         public string EmployeeRoleName { get; }
+
         public string EmployeeRoleDescription { get; }
     }
 }

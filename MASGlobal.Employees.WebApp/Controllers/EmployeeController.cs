@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using MASGlobal.Employees.Shared.Resources;
 using MASGlobal.Employees.Shared.Rest.Contracts;
@@ -45,10 +44,6 @@ namespace MASGlobal.Employees.WebApp.Controllers
         }
 
         public IActionResult Privacy() => View();
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error() => View(new ErrorViewModel
-            {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
 
         private async Task<IEnumerable<ServiceEmployeeDto>> GetServiceEmployeeDtoList(int employeeId)
         {

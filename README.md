@@ -44,24 +44,32 @@ To illustrate the previous section this is the general dependency graph for the 
 The following images show the type dependency diagram inside of every project.
 
  - MASGlobal.Employees.Domain
+
 ![enter image description here](https://lh3.googleusercontent.com/HWad4n2uf6Xz8mD3qoUfdox1NusS4Y6oV2dUrDpEEWPY1PTmPPEVjfGbjrh-Na_7MgLKSBrpuT5c8g "Domain")
 
 - MASGlobal.Employees.Data
+
 ![enter image description here](https://lh3.googleusercontent.com/BjDgTaaRiT2_ZNAajAUYnmKrTAgLIxO_OFO3rpwA8f15hCfP4PGG40Kf2cSxSh6drl7dXO2ZmKhqJw "Data")
+
 - MASGlobal.Employees.Services
+
 ![enter image description here](https://lh3.googleusercontent.com/ymiKSeFqW9nGFolIdLt1_3v_UqzuL5aILSJsBpPF99oA8J7u_oqszmMAXmYTh6Dujr8XI1uceJyyuA "Services")
 
 - MASGlobal.Employees.Shared
+
 ![enter image description here](https://lh3.googleusercontent.com/fWPB3ggRqjOlKGRsa0h6LE5zOxDMPnosReW6QiB-9Q8T3lFLHxgIsA6TEKfwkaGBkzWFiEpFBWpMug "Shared")
 
 - MASGlobal.Employees.UnitTests
+
 ![
 ](https://lh3.googleusercontent.com/BePTXDSrptEk4Jldu7kMuoD3EeEvKMAVc9nDY-2OW4eZglVkWSOsRkEso934xkA2U-sevcg6mETRqw "UnitTests")
 
 - MASGlobal.Employees.WebApi
+
 ![
 ](https://lh3.googleusercontent.com/yfTZlBMHAP_P7kO8tXclKe43zyA962x0BZJOk3RLm8I__3XA7xKklsyqQQUDrnTQq46kXpSqUQuiWQ "WebApi")
 
 - MASGlobal.Employees.WebApp
+
 ![enter image description here](https://lh3.googleusercontent.com/dShW-piGs8SvV2RK4bQ5_ru5E5eqOVPyH_iOazsGxOyfzUCnzSd4NIDZWernfrg7j2BDwoZs5iVsVQ "WebApp")
  

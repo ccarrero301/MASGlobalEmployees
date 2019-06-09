@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MASGlobal.Employees.Data.Contracts;
 using MASGlobal.Employees.Data.Specifications;
+using MASGlobal.Employees.Shared.Resources;
 using MASGlobal.Employees.Shared.Rest.Contracts;
 using MASGlobal.Employees.Shared.Rest.Entities;
 using DataDtoEmployee = MASGlobal.Employees.Shared.DTOs.Data.Employee;
@@ -57,10 +58,11 @@ namespace MASGlobal.Employees.Data.Repositories
             var dtoEmployeeList =
                 await _restClient.ExecuteGetResultAsync<IEnumerable<DataDtoEmployee>>(employeesEndpointRequest)
                     .ConfigureAwait(false);
+
             return dtoEmployeeList;
         }
 
         private static RestClientRequest GetEmployeesEndpointRequest() =>
-            new RestClientRequest("masglobaltestapi.azurewebsites.net/api/", "Employees");
+            new RestClientRequest(Rest.ExternalEmployeeBaseUri, Rest.ExternalAllEmployeesResource);
     }
 }

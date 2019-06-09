@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using MASGlobal.Employees.Shared.DTOs.Services;
+using MASGlobal.Employees.Shared.Resources;
 using MASGlobal.Employees.Shared.Rest.Contracts;
 using MASGlobal.Employees.Shared.Rest.Entities;
 using MASGlobal.Employees.WebApp.Models;
@@ -51,9 +52,9 @@ namespace MASGlobal.Employees.WebApp.Controllers
 
         private async Task<IEnumerable<Employee>> GetEmployeesList(int employeeId)
         {
-            const string baseUri = "localhost:44344/api/";
-            const string allEmployeesResource = "Employee/all";
-            const string singleEmployeeResource = "Employee/{employeeId}";
+            var baseUri = Rest.InternalEmployeeBaseUri;
+            var allEmployeesResource = Rest.InternalAllEmployeesResource;
+            var singleEmployeeResource = Rest.InternalSingleEmployeesResource;
 
             if (employeeId != int.MinValue)
                 return await GetSingleEmployeeList(employeeId, baseUri, singleEmployeeResource).ConfigureAwait(false);

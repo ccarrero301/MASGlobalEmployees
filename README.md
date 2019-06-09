@@ -33,3 +33,7 @@ It consists of the following seven projects:
 
 - **MASGlobal.Employees.UnitTests** .
 	> Contains unit tests to guarantee the correct function of the portal most important functionalities.
+	
+# General Dependency Graph  
+To illustrate the previous section this is the general dependency graph for the entire solution.
+![Project Dependency](https://lh3.googleusercontent.com/8k_imFMaf6mgrljhl-GnQbtVHcHdrIx1JNHvRAwNDJl7gneLVkxyVn9QbM_ZsQ9UBFj1iGymAxzS0w)

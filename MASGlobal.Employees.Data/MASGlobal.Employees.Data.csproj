@@ -13,4 +13,19 @@
     <ProjectReference Include="..\MASGlobal.Employees.Shared\MASGlobal.Employees.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Resources\EmployeesApi.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EmployeesApi.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\EmployeesApi.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmployeesApi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

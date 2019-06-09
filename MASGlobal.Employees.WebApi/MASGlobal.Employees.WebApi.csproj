@@ -21,4 +21,10 @@
     <ProjectReference Include="..\MASGlobal.Employees.Services\MASGlobal.Employees.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="MASGlobal.Employees.WebApi.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

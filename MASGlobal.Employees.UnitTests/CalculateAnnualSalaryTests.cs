@@ -52,13 +52,15 @@ namespace MASGlobal.Employees.UnitTests
         {
             // Arrange
             const double expectedAnnualSalary = 14400;
-            var hourlySalaryDataEmployeeDtoList = GetTestDataEmployeeDto(EmployeeContractType.HourlySalaryEmployee).ToList();
+            var hourlySalaryDataEmployeeDtoList =
+                GetTestDataEmployeeDto(EmployeeContractType.HourlySalaryEmployee).ToList();
             var hourlySalaryDataEmployeeDtoId = hourlySalaryDataEmployeeDtoList.FirstOrDefault().EmployeeId;
 
             _employeeRepositorySubstitute.GetAllEmployeesAsync().ReturnsForAnyArgs(hourlySalaryDataEmployeeDtoList);
 
             // Act
-            var serviceEmployeeDto = await _employeeService.GetSingleEmployeeByIdAsync(hourlySalaryDataEmployeeDtoId).ConfigureAwait(false);
+            var serviceEmployeeDto = await _employeeService.GetSingleEmployeeByIdAsync(hourlySalaryDataEmployeeDtoId)
+                .ConfigureAwait(false);
 
             // Hourly Salary Contract => 120 * HourlySalary * 12
             // In this case => 120 * 10 * 12 = 14400
@@ -71,13 +73,15 @@ namespace MASGlobal.Employees.UnitTests
         {
             // Arrange
             const double expectedAnnualSalary = 4800;
-            var monthlySalaryDataEmployeeDtoList = GetTestDataEmployeeDto(EmployeeContractType.MonthlySalaryEmployee).ToList();
+            var monthlySalaryDataEmployeeDtoList =
+                GetTestDataEmployeeDto(EmployeeContractType.MonthlySalaryEmployee).ToList();
             var monthlySalaryDataEmployeeDtoId = monthlySalaryDataEmployeeDtoList.FirstOrDefault().EmployeeId;
 
             _employeeRepositorySubstitute.GetAllEmployeesAsync().ReturnsForAnyArgs(monthlySalaryDataEmployeeDtoList);
 
             // Act
-            var serviceEmployeeDto = await _employeeService.GetSingleEmployeeByIdAsync(monthlySalaryDataEmployeeDtoId).ConfigureAwait(false);
+            var serviceEmployeeDto = await _employeeService.GetSingleEmployeeByIdAsync(monthlySalaryDataEmployeeDtoId)
+                .ConfigureAwait(false);
 
             // Monthly Salary Contract => MonthlySalary * 12
             // In this case => 400 * 12 = 4800

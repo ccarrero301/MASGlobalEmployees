@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using MASGlobal.Employees.Shared.Resources;
 using MASGlobal.Employees.Shared.Rest.Contracts;
 using MASGlobal.Employees.Shared.Rest.Entities;
 using MASGlobal.Employees.WebApp.Models;
+using MASGlobal.Employees.WebApp.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using ServiceEmployeeDto = MASGlobal.Employees.Shared.DTOs.Services.Employee;
 
@@ -11,9 +11,14 @@ namespace MASGlobal.Employees.WebApp.Controllers
 {
     public class EmployeeController : Controller
     {
+        private readonly IApplicationConfiguration _applicationConfiguration;
         private readonly IRestClient _restClient;
 
-        public EmployeeController(IRestClient restClient) => _restClient = restClient;
+        public EmployeeController(IApplicationConfiguration applicationConfiguration, IRestClient restClient)
+        {
+            _applicationConfiguration = applicationConfiguration;
+            _restClient = restClient;
+        }
 
         public IActionResult Home() => View();
 
@@ -47,14 +52,13 @@ namespace MASGlobal.Employees.WebApp.Controllers
 
         private async Task<IEnumerable<ServiceEmployeeDto>> GetServiceEmployeeDtoList(int employeeId)
         {
-            var baseUri = Rest.InternalEmployeeBaseUri;
-            var allEmployeesResource = Rest.InternalAllEmployeesResource;
-            var singleEmployeeResource = Rest.InternalSingleEmployeesResource;
-
             if (employeeId == int.MinValue)
-                return await GetAllServiceEmployeeDtoList(baseUri, allEmployeesResource).ConfigureAwait(false);
+                return await GetAllServiceEmployeeDtoList(_applicationConfiguration.EmployeesApiBaseUri,
+                    _applicationConfiguration.EmployeesApiAllEmployeesResource).ConfigureAwait(false);
 
-            var singleServiceEmployee = await GetSingleServiceEmployeeDto(employeeId, baseUri, singleEmployeeResource)
+            var singleServiceEmployee = await GetSingleServiceEmployeeDto(employeeId,
+                    _applicationConfiguration.EmployeesApiBaseUri,
+                    _applicationConfiguration.EmployeesApiSingleEmployeeResource)
                 .ConfigureAwait(false);
             return new List<ServiceEmployeeDto> {singleServiceEmployee};
         }

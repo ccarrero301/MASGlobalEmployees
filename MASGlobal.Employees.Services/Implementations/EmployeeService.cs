@@ -33,9 +33,12 @@ namespace MASGlobal.Employees.Services.Implementations
 
             var allDataEmployesDtoList = await _employeeRepository.GetAllEmployeesAsync().ConfigureAwait(false);
 
-            var allDataEmployeesListWithSpecificationApplied = allDataEmployesDtoList.Where(allEmployeesSpecification.IsSatisfiedBy);
+            var allDataEmployeesListWithSpecificationApplied =
+                allDataEmployesDtoList.Where(allEmployeesSpecification.IsSatisfiedBy);
 
-            var allDomainEmployeesList = _mapper.Map<IEnumerable<DataEmployeeDto>, IEnumerable<DomainEmployee>>(allDataEmployeesListWithSpecificationApplied);
+            var allDomainEmployeesList =
+                _mapper.Map<IEnumerable<DataEmployeeDto>, IEnumerable<DomainEmployee>>(
+                    allDataEmployeesListWithSpecificationApplied);
 
             var serviceEmployeesDtoList = allDomainEmployeesList.Select(GetSalaryContractEmployee).ToList();
 
@@ -48,9 +51,11 @@ namespace MASGlobal.Employees.Services.Implementations
 
             var allDataEmployesDtoList = await _employeeRepository.GetAllEmployeesAsync().ConfigureAwait(false);
 
-            var singleDataEmployeeWithSpecificationApplied = allDataEmployesDtoList.Where(singleEmployeeByIdSpecification.IsSatisfiedBy).SingleOrDefault();
+            var singleDataEmployeeWithSpecificationApplied = allDataEmployesDtoList
+                .Where(singleEmployeeByIdSpecification.IsSatisfiedBy).SingleOrDefault();
 
-            var singleDomainEmployee = _mapper.Map<DataEmployeeDto, DomainEmployee>(singleDataEmployeeWithSpecificationApplied);
+            var singleDomainEmployee =
+                _mapper.Map<DataEmployeeDto, DomainEmployee>(singleDataEmployeeWithSpecificationApplied);
 
             var serviceEmployeeDto = GetSalaryContractEmployee(singleDomainEmployee);
 

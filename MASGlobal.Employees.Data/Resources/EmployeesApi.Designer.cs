@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MASGlobal.Employees.Shared.Resources {
+namespace MASGlobal.Employees.Data.Resources {
     using System;
     
     
@@ -22,24 +22,24 @@ namespace MASGlobal.Employees.Shared.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Rest {
+    internal class EmployeesApi {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Rest() {
+        internal EmployeesApi() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MASGlobal.Employees.Shared.Resources.Rest", typeof(Rest).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MASGlobal.Employees.Data.Resources.EmployeesApi", typeof(EmployeesApi).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace MASGlobal.Employees.Shared.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,45 +63,18 @@ namespace MASGlobal.Employees.Shared.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Employees.
         /// </summary>
-        public static string ExternalAllEmployeesResource {
+        internal static string AllEmployeesResource {
             get {
-                return ResourceManager.GetString("ExternalAllEmployeesResource", resourceCulture);
+                return ResourceManager.GetString("AllEmployeesResource", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to masglobaltestapi.azurewebsites.net/api/.
         /// </summary>
-        public static string ExternalEmployeeBaseUri {
+        internal static string BaseUri {
             get {
-                return ResourceManager.GetString("ExternalEmployeeBaseUri", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Employees/all.
-        /// </summary>
-        public static string InternalAllEmployeesResource {
-            get {
-                return ResourceManager.GetString("InternalAllEmployeesResource", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to localhost:44344/api/.
-        /// </summary>
-        public static string InternalEmployeeBaseUri {
-            get {
-                return ResourceManager.GetString("InternalEmployeeBaseUri", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Employees/{employeeId}.
-        /// </summary>
-        public static string InternalSingleEmployeesResource {
-            get {
-                return ResourceManager.GetString("InternalSingleEmployeesResource", resourceCulture);
+                return ResourceManager.GetString("BaseUri", resourceCulture);
             }
         }
     }

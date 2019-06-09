@@ -1,3 +1,4 @@
+
 # MASGlobal Consulting Employees Portal
 
 Hi there,
@@ -24,7 +25,7 @@ It consists of the following seven projects:
 - **MASGlobal.Employees.Domain** .
 	> Contains the business domain entites related to the Employees.
 - **MASGlobal.Employees.Data** .
-	> Is the data access layer. It implements the repository pattern. The current implementation retrieves the employee data from an external api : [Employee external API](https://masglobalemployeesapp.azurewebsites.net)
+	> Is the data access layer. It implements the repository pattern. The current implementation retrieves the employee data from an external api : [Employee external API](http://masglobaltestapi.azurewebsites.net/swagger/)
 - **MASGlobal.Employees.Services** .
 	> Represents the domain business services.
 	In this project is where the annual salary calculation takes place. The code retrieves the data calling the data access layer, transform that data into business entities, and performs the calculation. It returns a DTO (data transfer object) with the desired data. 

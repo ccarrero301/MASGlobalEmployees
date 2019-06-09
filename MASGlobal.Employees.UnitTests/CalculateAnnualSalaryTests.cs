@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using MASGlobal.Employees.Data.Contracts;
@@ -7,7 +9,7 @@ using MASGlobal.Employees.Services.Implementations;
 using MASGlobal.Employees.WebApi.Mappings;
 using NSubstitute;
 using NUnit.Framework;
-using DomainEmployee = MASGlobal.Employees.Domain.Entities.Employee;
+using DataEmployeeDto = MASGlobal.Employees.Shared.DTOs.Data.Employee;
 
 namespace MASGlobal.Employees.UnitTests
 {
@@ -27,11 +29,22 @@ namespace MASGlobal.Employees.UnitTests
         private IMapper _mapper;
         private IEmployeeService _employeeService;
 
-        private static DomainEmployee GetDomainTestEmployee(EmployeeContractType employeeContractType)
+        private static IEnumerable<DataEmployeeDto> GetTestDataEmployeeDto(EmployeeContractType employeeContractType)
         {
-            var employeeRole = new EmployeeRole(1, "Administrator", "This employee is an administrator");
-
-            return new DomainEmployee(1, "Carlos", employeeRole, employeeContractType, 10, 400);
+            return new List<DataEmployeeDto>
+            {
+                new DataEmployeeDto
+                {
+                    EmployeeId = 1,
+                    EmployeeName = "Carlos",
+                    EmployeeContractType = employeeContractType.ToString(),
+                    EmployeeRoleId = 1,
+                    EmployeeRoleName = "Administrator",
+                    EmployeeRoleDescription = "This employee is an administrator",
+                    EmployeeHourlySalary = 10,
+                    EmployeeMonthlySalary = 400
+                }
+            };
         }
 
         [Test]
@@ -39,18 +52,18 @@ namespace MASGlobal.Employees.UnitTests
         {
             // Arrange
             const double expectedAnnualSalary = 14400;
+            var hourlySalaryDataEmployeeDtoList = GetTestDataEmployeeDto(EmployeeContractType.HourlySalaryEmployee).ToList();
+            var hourlySalaryDataEmployeeDtoId = hourlySalaryDataEmployeeDtoList.FirstOrDefault().EmployeeId;
 
-            _employeeRepositorySubstitute.GetEmployeesByIdAsync(default)
-                .ReturnsForAnyArgs(GetDomainTestEmployee(EmployeeContractType.HourlySalaryEmployee));
+            _employeeRepositorySubstitute.GetAllEmployeesAsync().ReturnsForAnyArgs(hourlySalaryDataEmployeeDtoList);
 
             // Act
-            var serviceDtoEmployee = await _employeeService.GetEmployeeByIdAsync(default).ConfigureAwait(false);
-
+            var serviceEmployeeDto = await _employeeService.GetSingleEmployeeByIdAsync(hourlySalaryDataEmployeeDtoId).ConfigureAwait(false);
 
             // Hourly Salary Contract => 120 * HourlySalary * 12
             // In this case => 120 * 10 * 12 = 14400
             //Assert
-            Assert.IsTrue(serviceDtoEmployee.AnnualSalary.Equals(expectedAnnualSalary));
+            Assert.IsTrue(serviceEmployeeDto.AnnualSalary.Equals(expectedAnnualSalary));
         }
 
         [Test]
@@ -58,17 +71,18 @@ namespace MASGlobal.Employees.UnitTests
         {
             // Arrange
             const double expectedAnnualSalary = 4800;
+            var monthlySalaryDataEmployeeDtoList = GetTestDataEmployeeDto(EmployeeContractType.MonthlySalaryEmployee).ToList();
+            var monthlySalaryDataEmployeeDtoId = monthlySalaryDataEmployeeDtoList.FirstOrDefault().EmployeeId;
 
-            _employeeRepositorySubstitute.GetEmployeesByIdAsync(default)
-                .ReturnsForAnyArgs(GetDomainTestEmployee(EmployeeContractType.MonthlySalaryEmployee));
+            _employeeRepositorySubstitute.GetAllEmployeesAsync().ReturnsForAnyArgs(monthlySalaryDataEmployeeDtoList);
 
             // Act
-            var serviceDtoEmployee = await _employeeService.GetEmployeeByIdAsync(default).ConfigureAwait(false);
+            var serviceEmployeeDto = await _employeeService.GetSingleEmployeeByIdAsync(monthlySalaryDataEmployeeDtoId).ConfigureAwait(false);
 
             // Monthly Salary Contract => MonthlySalary * 12
             // In this case => 400 * 12 = 4800
             //Assert
-            Assert.IsTrue(serviceDtoEmployee.AnnualSalary.Equals(expectedAnnualSalary));
+            Assert.IsTrue(serviceEmployeeDto.AnnualSalary.Equals(expectedAnnualSalary));
         }
     }
 }

@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MASGlobal.Employees.Domain\MASGlobal.Employees.Domain.csproj" />
     <ProjectReference Include="..\MASGlobal.Employees.Shared\MASGlobal.Employees.Shared.csproj" />
   </ItemGroup>
 

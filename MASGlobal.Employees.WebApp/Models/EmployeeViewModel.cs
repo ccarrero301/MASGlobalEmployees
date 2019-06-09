@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using MASGlobal.Employees.Shared.DTOs.Services;
+using ServiceEmployeeDto = MASGlobal.Employees.Shared.DTOs.Services.Employee;
 
 namespace MASGlobal.Employees.WebApp.Models
 {
@@ -7,6 +7,6 @@ namespace MASGlobal.Employees.WebApp.Models
     {
         public int EmployeeId { get; set; }
 
-        public IEnumerable<Employee> Employees { get; set; }
+        public IEnumerable<ServiceEmployeeDto> Employees { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace MASGlobal.Employees.WebApi.Controllers
         [Route("all")]
         public async Task<ActionResult> GetEmployees()
         {
-            var serviceDtoEmployeeList = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
+            var serviceDtoEmployeeList = await _employeeService.GetAllEmployeesAsync().ConfigureAwait(false);
 
             return Ok(serviceDtoEmployeeList);
         }
@@ -28,7 +28,8 @@ namespace MASGlobal.Employees.WebApi.Controllers
         [Route("{employeeId}")]
         public async Task<ActionResult> GetEmployeeById(int employeeId)
         {
-            var serviceDtoEmployee = await _employeeService.GetEmployeeByIdAsync(employeeId).ConfigureAwait(false);
+            var serviceDtoEmployee =
+                await _employeeService.GetSingleEmployeeByIdAsync(employeeId).ConfigureAwait(false);
 
             return Ok(serviceDtoEmployee);
         }

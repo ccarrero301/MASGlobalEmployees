@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using MASGlobal.Employees.Shared.DTOs.Services;
 using MASGlobal.Employees.Shared.Resources;
 using MASGlobal.Employees.Shared.Rest.Contracts;
 using MASGlobal.Employees.Shared.Rest.Entities;
 using MASGlobal.Employees.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using ServiceEmployeeDto = MASGlobal.Employees.Shared.DTOs.Services.Employee;
 
 namespace MASGlobal.Employees.WebApp.Controllers
 {
@@ -24,7 +24,7 @@ namespace MASGlobal.Employees.WebApp.Controllers
             var employeeViewModel = new EmployeeViewModel
             {
                 EmployeeId = employeeId,
-                Employees = new List<Employee>()
+                Employees = new List<ServiceEmployeeDto>()
             };
 
             return View("Index", employeeViewModel);
@@ -33,7 +33,7 @@ namespace MASGlobal.Employees.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> GetEmployeesPost(int employeeId = int.MinValue)
         {
-            var serviceEmployeesDtoList = await GetEmployeesList(employeeId).ConfigureAwait(false);
+            var serviceEmployeesDtoList = await GetServiceEmployeeDtoList(employeeId).ConfigureAwait(false);
 
             var employeeViewModel = new EmployeeViewModel
             {
@@ -50,48 +50,40 @@ namespace MASGlobal.Employees.WebApp.Controllers
         public IActionResult Error() => View(new ErrorViewModel
             {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
 
-        private async Task<IEnumerable<Employee>> GetEmployeesList(int employeeId)
+        private async Task<IEnumerable<ServiceEmployeeDto>> GetServiceEmployeeDtoList(int employeeId)
         {
             var baseUri = Rest.InternalEmployeeBaseUri;
             var allEmployeesResource = Rest.InternalAllEmployeesResource;
             var singleEmployeeResource = Rest.InternalSingleEmployeesResource;
 
-            if (employeeId != int.MinValue)
-                return await GetSingleEmployeeList(employeeId, baseUri, singleEmployeeResource).ConfigureAwait(false);
+            if (employeeId == int.MinValue)
+                return await GetAllServiceEmployeeDtoList(baseUri, allEmployeesResource).ConfigureAwait(false);
 
-            return await GetAllEmployeesList(baseUri, allEmployeesResource).ConfigureAwait(false);
+            var singleServiceEmployee = await GetSingleServiceEmployeeDto(employeeId, baseUri, singleEmployeeResource)
+                .ConfigureAwait(false);
+            return new List<ServiceEmployeeDto> {singleServiceEmployee};
         }
 
-        private async Task<IEnumerable<Employee>> GetSingleEmployeeList(int employeeId, string baseUri,
-            string singleEmployeeResource)
+        private Task<ServiceEmployeeDto> GetSingleServiceEmployeeDto(int employeeId,
+            string baseUri, string singleEmployeeResource)
         {
             var employeeIdUrlSegmentDictionary = new Dictionary<string, string>
             {
                 {"employeeId", employeeId.ToString()}
             };
 
-            var request = new RestClientRequest(baseUri, singleEmployeeResource, null, null,
+            var restClientRequest = new RestClientRequest(baseUri, singleEmployeeResource, null, null,
                 employeeIdUrlSegmentDictionary);
 
-            var serviceEmployeesDto =
-                await _restClient.ExecuteGetResultAsync<Employee>(request).ConfigureAwait(false);
-
-            var singleEmployeeList = new List<Employee> {serviceEmployeesDto};
-
-            return singleEmployeeList;
+            return _restClient.ExecuteGetResultAsync<ServiceEmployeeDto>(restClientRequest);
         }
 
-        private async Task<IEnumerable<Employee>> GetAllEmployeesList(string baseUri, string allEmployeesResource)
+        private Task<IEnumerable<ServiceEmployeeDto>> GetAllServiceEmployeeDtoList(string baseUri,
+            string allEmployeesResource)
         {
-            var request = new RestClientRequest(baseUri, allEmployeesResource);
+            var restClientRequest = new RestClientRequest(baseUri, allEmployeesResource);
 
-            var serviceEmployeesDtoList = await _restClient.ExecuteGetResultAsync<IEnumerable<Employee>>(request)
-                .ConfigureAwait(false);
-
-            var allEmployeesList = new List<Employee>();
-            allEmployeesList.AddRange(serviceEmployeesDtoList);
-
-            return allEmployeesList;
+            return _restClient.ExecuteGetResultAsync<IEnumerable<ServiceEmployeeDto>>(restClientRequest);
         }
     }
 }

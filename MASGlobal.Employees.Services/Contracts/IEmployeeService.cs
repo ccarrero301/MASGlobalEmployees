@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using MASGlobal.Employees.Shared.DTOs.Services;
+using ServiceEmployeeDto = MASGlobal.Employees.Shared.DTOs.Services.Employee;
 
 namespace MASGlobal.Employees.Services.Contracts
 {
     public interface IEmployeeService
     {
-        Task<IEnumerable<Employee>> GetEmployeesAsync();
+        Task<IEnumerable<ServiceEmployeeDto>> GetAllEmployeesAsync();
 
-        Task<Employee> GetEmployeeByIdAsync(int employeeId);
+        Task<ServiceEmployeeDto> GetSingleEmployeeByIdAsync(int employeeId);
     }
 }

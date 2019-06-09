@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MASGlobal.Employees.Data\MASGlobal.Employees.Data.csproj" />
+    <ProjectReference Include="..\MASGlobal.Employees.Domain\MASGlobal.Employees.Domain.csproj" />
   </ItemGroup>
 
 </Project>

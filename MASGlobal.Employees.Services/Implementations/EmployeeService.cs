@@ -9,7 +9,10 @@ using MASGlobal.Employees.Services.Contracts;
 using MASGlobal.Employees.Services.Factories.AbstractCreators;
 using MASGlobal.Employees.Services.Factories.AbstractEmployees;
 using MASGlobal.Employees.Services.Factories.ConcreteCreators;
+using MASGlobal.Employees.Services.Specifications;
+using DomainEmployee = MASGlobal.Employees.Domain.Entities.Employee;
 using ServiceEmployeeDto = MASGlobal.Employees.Shared.DTOs.Services.Employee;
+using DataEmployeeDto = MASGlobal.Employees.Shared.DTOs.Data.Employee;
 
 namespace MASGlobal.Employees.Services.Implementations
 {
@@ -24,25 +27,37 @@ namespace MASGlobal.Employees.Services.Implementations
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ServiceEmployeeDto>> GetEmployeesAsync()
+        public async Task<IEnumerable<ServiceEmployeeDto>> GetAllEmployeesAsync()
         {
-            var allDomainEmployees = await _employeeRepository.GetAllEmployeesAsync().ConfigureAwait(false);
+            var allEmployeesSpecification = new AllEmployeesSpecification();
 
-            var serviceEmployeesDtoList = allDomainEmployees.Select(GetEmployee).ToList();
+            var allDataEmployesDtoList = await _employeeRepository.GetAllEmployeesAsync().ConfigureAwait(false);
+
+            var allDataEmployeesListWithSpecificationApplied = allDataEmployesDtoList.Where(allEmployeesSpecification.IsSatisfiedBy);
+
+            var allDomainEmployeesList = _mapper.Map<IEnumerable<DataEmployeeDto>, IEnumerable<DomainEmployee>>(allDataEmployeesListWithSpecificationApplied);
+
+            var serviceEmployeesDtoList = allDomainEmployeesList.Select(GetSalaryContractEmployee).ToList();
 
             return serviceEmployeesDtoList;
         }
 
-        public async Task<ServiceEmployeeDto> GetEmployeeByIdAsync(int employeeId)
+        public async Task<ServiceEmployeeDto> GetSingleEmployeeByIdAsync(int employeeId)
         {
-            var domainEmployee = await _employeeRepository.GetEmployeesByIdAsync(employeeId).ConfigureAwait(false);
+            var singleEmployeeByIdSpecification = new EmployeeByIdSpecification(employeeId);
 
-            var serviceEmployeeDto = GetEmployee(domainEmployee);
+            var allDataEmployesDtoList = await _employeeRepository.GetAllEmployeesAsync().ConfigureAwait(false);
+
+            var singleDataEmployeeWithSpecificationApplied = allDataEmployesDtoList.Where(singleEmployeeByIdSpecification.IsSatisfiedBy).SingleOrDefault();
+
+            var singleDomainEmployee = _mapper.Map<DataEmployeeDto, DomainEmployee>(singleDataEmployeeWithSpecificationApplied);
+
+            var serviceEmployeeDto = GetSalaryContractEmployee(singleDomainEmployee);
 
             return serviceEmployeeDto;
         }
 
-        private ServiceEmployeeDto GetEmployee(Employee domainEmployee)
+        private ServiceEmployeeDto GetSalaryContractEmployee(DomainEmployee domainEmployee)
         {
             IEmployeeContractFactory employeeContractFactory;
 
@@ -67,7 +82,7 @@ namespace MASGlobal.Employees.Services.Implementations
                     throw new ArgumentOutOfRangeException();
             }
 
-            var annualSalaryEmployee = employeeContractFactory.GetEmployee();
+            var annualSalaryEmployee = employeeContractFactory.GetSalaryContractEmployee();
 
             var serviceDtoEmployee = _mapper.Map<AnnualSalaryEmployee, ServiceEmployeeDto>(annualSalaryEmployee);
 

@@ -53,9 +53,10 @@ The following images show the type dependency diagram inside of every project.
 
 - MASGlobal.Employees.Services
 
-![enter image description here](https://lh3.googleusercontent.com/ymiKSeFqW9nGFolIdLt1_3v_UqzuL5aILSJsBpPF99oA8J7u_oqszmMAXmYTh6Dujr8XI1uceJyyuA "Services")
+![enter image description here](https://lh3.googleusercontent.com/JnmMBw1uZqwH3fP_FwYOQgdsERzJxU38hytllXsl7_K2W0drsYIgNa7xNqtC_4XgRQT7vd4RmaYPfg "Services")
 
 - MASGlobal.Employees.Shared
+
 ![enter image description here](https://lh3.googleusercontent.com/bQxtDIhElHDuPMxNfp1X-kh87jYs3YdBDUeG6ZR87SMbm6-OZ0wXyJGcZG9khccW2tevid9sy6lHew "Shared")
 
 - MASGlobal.Employees.UnitTests

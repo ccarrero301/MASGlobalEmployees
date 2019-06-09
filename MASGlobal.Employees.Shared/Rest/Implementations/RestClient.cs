@@ -6,18 +6,20 @@ using MASGlobal.Employees.Shared.Rest.Entities;
 using Newtonsoft.Json;
 using Polly;
 using RestSharp;
+using IRestClient = MASGlobal.Employees.Shared.Rest.Contracts.IRestClient;
 
 namespace MASGlobal.Employees.Shared.Rest.Implementations
 {
-    public sealed class RestClient : Shared.Rest.Contracts.IRestClient
+    public sealed class RestClient : IRestClient
     {
         public async Task<TResult> ExecutePostResultAsync<TResult>(RestClientRequest requestInfo)
         {
             var restClient = GetRestClient(false, requestInfo);
             var request = GetRequest(Method.POST, requestInfo);
 
-            var restResponse = await ExecutePostWithResponseOrExceptionRetryPolicyAsync<TResult>(restClient, request, 3, 1)
-                .ConfigureAwait(false);
+            var restResponse =
+                await ExecutePostWithResponseOrExceptionRetryPolicyAsync<TResult>(restClient, request, 3, 1)
+                    .ConfigureAwait(false);
 
             if (restResponse.IsSuccessful)
                 return JsonConvert.DeserializeObject<TResult>(restResponse.Content);
@@ -41,7 +43,7 @@ namespace MASGlobal.Employees.Shared.Rest.Implementations
         }
 
         private static Task<IRestResponse<TResult>> ExecutePostWithResponseOrExceptionRetryPolicyAsync<TResult>(
-            IRestClient restClient,
+            RestSharp.IRestClient restClient,
             IRestRequest request, int maxRetryAttempts, int retryFactor)
         {
             HttpStatusCode[] httpStatusCodesWorthRetrying =
@@ -65,7 +67,7 @@ namespace MASGlobal.Employees.Shared.Rest.Implementations
         }
 
         private static Task<IRestResponse<TResult>> ExecuteGetWithResponseOrExceptionRetryPolicyAsync<TResult>(
-            IRestClient restClient,
+            RestSharp.IRestClient restClient,
             IRestRequest request, int maxRetryAttempts, int retryFactor)
         {
             HttpStatusCode[] httpStatusCodesWorthRetrying =
@@ -88,7 +90,7 @@ namespace MASGlobal.Employees.Shared.Rest.Implementations
                 .ExecuteAsync(() => restClient.ExecuteGetTaskAsync<TResult>(request));
         }
 
-        private static IRestClient GetRestClient(bool useHttp, RestClientRequest requestInfo)
+        private static RestSharp.IRestClient GetRestClient(bool useHttp, RestClientRequest requestInfo)
         {
             var transferProtocol = useHttp ? "http://" : "https://";
 

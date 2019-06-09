@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using AutoMapper;
 using MASGlobal.Employees.Data.Contracts;
 using MASGlobal.Employees.Data.Repositories;
 using MASGlobal.Employees.Services.Contracts;
@@ -21,10 +20,7 @@ namespace MASGlobal.Employees.WebApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public IConfiguration Configuration { get; }
 

@@ -9,13 +9,6 @@
             EmployeeRoleDescription = employeeRoleDescription;
         }
 
-        public EmployeeRole()
-        {
-            EmployeeRoleId = 0;
-            EmployeeRoleName = "Not Defined";
-            EmployeeRoleDescription = "Not Defined";
-        }
-
         public int EmployeeRoleId { get; }
         public string EmployeeRoleName { get; }
         public string EmployeeRoleDescription { get; }

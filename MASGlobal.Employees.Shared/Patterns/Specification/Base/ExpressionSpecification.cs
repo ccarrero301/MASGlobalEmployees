@@ -10,6 +10,7 @@ namespace MASGlobal.Employees.Shared.Patterns.Specification.Base
         public override bool IsSatisfiedBy(TEntity entityToTest)
         {
             var predicate = ToExpression().Compile();
+
             return predicate(entityToTest);
         }
     }

@@ -7,7 +7,7 @@ This repository is intended as the primary source for the new Employees Portal. 
 The current release supports the information retrieval for all employees or just a single employee by Employee Id.
 
 # Try it Yourself
-You can try the portal by yourself  [here]([https://masglobalemployeesapp.azurewebsites.net/](https://masglobalemployeesapp.azurewebsites.net/)). If you want to take a look at the code, just clone or download this repository.
+You can try the portal by yourself [here](https://masglobalemployeesapp.azurewebsites.net/).   If you want to take a look at the code, just clone or download this repository.
 
 
 # Solution Structure

@@ -19,7 +19,8 @@ It consists of the following seven projects:
 - **MASGlobal.Employees.WebApp** .
 	> This is the Web Application. The end user will interact with the application to search for employee data. 
 - **MASGlobal.Employees.WebApi** .
-	> This is the entry point for the Web Application. Meaning the web application will send HTTP requests to this web api. 
+	> This is the entry point for the Web Application. Meaning the web application will send HTTP requests to this web api.
+	You can check it out [here](https://masglobalemployeesapi.azurewebsites.net) .
 - **MASGlobal.Employees.Shared** .
 	> Contains some shared functionality some of the other projects use. 
 - **MASGlobal.Employees.Domain** .

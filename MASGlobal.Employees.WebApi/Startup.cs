@@ -24,6 +24,8 @@ namespace MASGlobal.Employees.WebApi
         {
             app.UseHsts();
 
+            app.UseCustomExceptionHandler();
+
             app.AddSwaggerMiddleware();
 
             app.UseHttpsRedirection();

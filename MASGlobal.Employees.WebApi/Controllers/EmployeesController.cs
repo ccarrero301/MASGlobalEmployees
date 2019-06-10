@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MASGlobal.Employees.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +10,7 @@ namespace MASGlobal.Employees.WebApi.Controllers
     {
         private readonly IEmployeeService _employeeService;
 
-        public EmployeesController(IEmployeeService employeeService)
-        {
-            _employeeService = employeeService;
-        }
+        public EmployeesController(IEmployeeService employeeService) => _employeeService = employeeService;
 
         [HttpGet]
         [Route("all")]
@@ -29,17 +25,10 @@ namespace MASGlobal.Employees.WebApi.Controllers
         [Route("{employeeId}")]
         public async Task<ActionResult> GetEmployeeById(int employeeId)
         {
-            try
-            {
-                var serviceDtoEmployee =
-                    await _employeeService.GetSingleEmployeeByIdAsync(employeeId).ConfigureAwait(false);
+            var serviceDtoEmployee =
+                await _employeeService.GetSingleEmployeeByIdAsync(employeeId).ConfigureAwait(false);
 
-                return Ok(serviceDtoEmployee);
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            return Ok(serviceDtoEmployee);
         }
     }
 }

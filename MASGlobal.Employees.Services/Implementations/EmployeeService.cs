@@ -54,6 +54,9 @@ namespace MASGlobal.Employees.Services.Implementations
             var singleDataEmployeeWithSpecificationApplied = allDataEmployesDtoList
                 .Where(singleEmployeeByIdSpecification.IsSatisfiedBy).SingleOrDefault();
 
+            if(singleDataEmployeeWithSpecificationApplied == null)
+                throw new Exception("No Employee matched");
+
             var singleDomainEmployee =
                 _mapper.Map<DataEmployeeDto, DomainEmployee>(singleDataEmployeeWithSpecificationApplied);
 

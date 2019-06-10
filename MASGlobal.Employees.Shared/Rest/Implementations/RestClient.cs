@@ -24,7 +24,7 @@ namespace MASGlobal.Employees.Shared.Rest.Implementations
             if (restResponse.IsSuccessful)
                 return JsonConvert.DeserializeObject<TResult>(restResponse.Content);
 
-            throw new Exception(GetResponseErrorMessage(restResponse));
+            throw new Exception(restResponse.Content.Trim('"'));
         }
 
         public async Task<TResult> ExecuteGetResultAsync<TResult>(RestClientRequest requestInfo)
@@ -39,7 +39,7 @@ namespace MASGlobal.Employees.Shared.Rest.Implementations
             if (restResponse.IsSuccessful)
                 return JsonConvert.DeserializeObject<TResult>(restResponse.Content);
 
-            throw new Exception(GetResponseErrorMessage(restResponse));
+            throw new Exception(restResponse.Content.Trim('"'));
         }
 
         private static Task<IRestResponse<TResult>> ExecutePostWithResponseOrExceptionRetryPolicyAsync<TResult>(
@@ -140,17 +140,6 @@ namespace MASGlobal.Employees.Shared.Rest.Implementations
 
             foreach (var uriSegment in requestInfo.UriSegments)
                 request.AddUrlSegment(uriSegment.Key, uriSegment.Value);
-        }
-
-        private static string GetResponseErrorMessage(IRestResponse restResponse)
-        {
-            var errorExceptionMessage = restResponse.ErrorException?.Message ?? string.Empty;
-            var errorMessage = restResponse.ErrorMessage ?? string.Empty;
-
-            return $"Error Exception Message: {errorExceptionMessage}, " + $"Error Message : {errorMessage}, " +
-                   $"Response Status : {restResponse.ResponseStatus}, " +
-                   $"Response Status Code: {restResponse.StatusCode}, " +
-                   $"Response Status Description: {restResponse.StatusDescription}";
         }
     }
 }

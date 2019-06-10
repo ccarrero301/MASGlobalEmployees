@@ -1,10 +1,7 @@
-﻿using MASGlobal.Employees.Shared.Rest.Contracts;
-using MASGlobal.Employees.Shared.Rest.Implementations;
-using MASGlobal.Employees.WebApp.Services.Contracts;
+﻿using MASGlobal.Employees.WebApp.Extensions;
 using MASGlobal.Employees.WebApp.Services.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,15 +18,7 @@ namespace MASGlobal.Employees.WebApp
         {
             var applicationConfiguration = new ApplicationConfiguration(Configuration);
 
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
-            services.AddSingleton<IApplicationConfiguration>(applicationConfiguration);
-
-            services.AddScoped<IRestClient, RestClient>();
+            services.AddDependencyInjectionServices(applicationConfiguration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -39,7 +28,6 @@ namespace MASGlobal.Employees.WebApp
             app.UseHsts();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
 
             app.UseMvc(routes =>
             {

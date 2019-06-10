@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using MASGlobal.Employees.Shared.Rest.Contracts;
 using MASGlobal.Employees.Shared.Rest.Entities;
@@ -37,15 +38,29 @@ namespace MASGlobal.Employees.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> GetEmployeesPost(int employeeId = int.MinValue)
         {
-            var serviceEmployeesDtoList = await GetServiceEmployeeDtoList(employeeId).ConfigureAwait(false);
-
-            var employeeViewModel = new EmployeeViewModel
+            try
             {
-                EmployeeId = employeeId,
-                Employees = serviceEmployeesDtoList
-            };
+                var serviceEmployeesDtoList = await GetServiceEmployeeDtoList(employeeId).ConfigureAwait(false);
 
-            return View("Index", employeeViewModel);
+                var employeeViewModel = new EmployeeViewModel
+                {
+                    EmployeeId = employeeId,
+                    Employees = serviceEmployeesDtoList
+                };
+
+                return View("Index", employeeViewModel);
+            }
+            catch (Exception exception)
+            {
+                var errorEmployeeViewModel = new EmployeeViewModel
+                {
+                    EmployeeId = employeeId,
+                    Employees = new List<ServiceEmployeeDto>(),
+                    ErrorMessage = exception.Message
+                };
+
+                return View("Index", errorEmployeeViewModel);
+            }
         }
 
         public IActionResult Privacy() => View();

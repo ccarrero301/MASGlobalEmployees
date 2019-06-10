@@ -8,5 +8,7 @@ namespace MASGlobal.Employees.WebApp.Models
         public int EmployeeId { get; set; }
 
         public IEnumerable<ServiceEmployeeDto> Employees { get; set; }
+
+        public string ErrorMessage { get; set; }
     }
 }

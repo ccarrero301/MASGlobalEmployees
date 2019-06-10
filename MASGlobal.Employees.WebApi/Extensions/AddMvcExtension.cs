@@ -4,7 +4,7 @@ using Newtonsoft.Json.Converters;
 
 namespace MASGlobal.Employees.WebApi.Extensions
 {
-    public static class AddMvcExtension
+    internal static class AddMvcExtension
     {
         public static void AddMvcService(this IServiceCollection services)
         {

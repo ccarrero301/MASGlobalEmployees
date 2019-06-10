@@ -6,7 +6,7 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace MASGlobal.Employees.WebApi.Extensions
 {
-    public static class AddSwaggerExtension
+    internal static class AddSwaggerExtension
     {
         public static void AddSwaggerService(this IServiceCollection services)
         {

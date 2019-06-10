@@ -1,6 +1,6 @@
 ﻿namespace MASGlobal.Employees.Domain.Entities
 {
-    public class EmployeeRole
+    public sealed class EmployeeRole
     {
         public EmployeeRole(int employeeRoleId, string employeeRoleName, string employeeRoleDescription)
         {

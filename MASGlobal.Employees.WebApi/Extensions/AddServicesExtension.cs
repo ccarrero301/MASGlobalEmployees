@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MASGlobal.Employees.WebApi.Extensions
 {
-    public static class AddServicesExtension
+    internal static class AddServicesExtension
     {
         public static void AddDependencyInjectionServices(this IServiceCollection services)
         {

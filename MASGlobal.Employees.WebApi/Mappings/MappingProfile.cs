@@ -8,7 +8,7 @@ using DataEmployeeDto = MASGlobal.Employees.Shared.DTOs.Data.Employee;
 
 namespace MASGlobal.Employees.WebApi.Mappings
 {
-    public class MappingProfile : Profile
+    internal sealed class MappingProfile : Profile
     {
         public MappingProfile()
         {

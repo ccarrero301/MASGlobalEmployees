@@ -2,7 +2,7 @@
 
 namespace MASGlobal.Employees.WebApi.Extensions
 {
-    public static class ConfigureSwaggerExtension
+    internal static class ConfigureSwaggerExtension
     {
         public static void AddSwaggerMiddleware(this IApplicationBuilder app)
         {

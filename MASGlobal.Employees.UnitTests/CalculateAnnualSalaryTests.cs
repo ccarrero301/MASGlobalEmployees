@@ -14,7 +14,7 @@ using DataEmployeeDto = MASGlobal.Employees.Shared.DTOs.Data.Employee;
 namespace MASGlobal.Employees.UnitTests
 {
     [TestFixture]
-    public class CalculateAnnualSalaryTests
+    internal sealed class CalculateAnnualSalaryTests
     {
         [SetUp]
         public void Setup()

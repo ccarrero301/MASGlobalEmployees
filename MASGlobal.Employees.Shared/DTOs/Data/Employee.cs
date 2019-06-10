@@ -2,7 +2,7 @@
 
 namespace MASGlobal.Employees.Shared.DTOs.Data
 {
-    public class Employee
+    public sealed class Employee
     {
         [JsonProperty("id")] public int EmployeeId { get; set; }
 

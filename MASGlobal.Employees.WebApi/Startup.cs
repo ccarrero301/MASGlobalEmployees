@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MASGlobal.Employees.WebApi
 {
-    public class Startup
+    internal sealed class Startup
     {
         public Startup(IConfiguration configuration) => Configuration = configuration;
 

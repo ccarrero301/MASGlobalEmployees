@@ -6,7 +6,7 @@ namespace MASGlobal.Employees.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeesController : ControllerBase
+    public sealed class EmployeesController : ControllerBase
     {
         private readonly IEmployeeService _employeeService;
 

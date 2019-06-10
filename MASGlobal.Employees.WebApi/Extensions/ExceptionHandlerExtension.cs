@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace MASGlobal.Employees.WebApi.Extensions
 {
-    public static class ExceptionHandlerExtension
+    internal static class ExceptionHandlerExtension
     {
         internal static void UseCustomExceptionHandler(this IApplicationBuilder applicationBuilder) =>
             HandleGeneralExceptionErrors(applicationBuilder);

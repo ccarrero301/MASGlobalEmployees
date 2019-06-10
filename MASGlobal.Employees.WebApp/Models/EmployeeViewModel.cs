@@ -3,7 +3,7 @@ using ServiceEmployeeDto = MASGlobal.Employees.Shared.DTOs.Services.Employee;
 
 namespace MASGlobal.Employees.WebApp.Models
 {
-    public class EmployeeViewModel
+    public sealed class EmployeeViewModel
     {
         public int EmployeeId { get; set; }
 

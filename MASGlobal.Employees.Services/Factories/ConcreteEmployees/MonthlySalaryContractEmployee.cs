@@ -3,7 +3,7 @@ using MASGlobal.Employees.Services.Factories.AbstractEmployees;
 
 namespace MASGlobal.Employees.Services.Factories.ConcreteEmployees
 {
-    internal class MonthlySalaryContractEmployee : AnnualSalaryEmployee
+    internal sealed class MonthlySalaryContractEmployee : AnnualSalaryEmployee
     {
         public MonthlySalaryContractEmployee(int employeeId, string employeeName, EmployeeRole employeeRole,
             EmployeeContractType employeeContractType, double hourlySalary, double monthlySalary) : base(employeeId,

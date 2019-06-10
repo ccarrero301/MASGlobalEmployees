@@ -16,7 +16,7 @@ using DataEmployeeDto = MASGlobal.Employees.Shared.DTOs.Data.Employee;
 
 namespace MASGlobal.Employees.Services.Implementations
 {
-    public class EmployeeService : IEmployeeService
+    public sealed class EmployeeService : IEmployeeService
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IMapper _mapper;

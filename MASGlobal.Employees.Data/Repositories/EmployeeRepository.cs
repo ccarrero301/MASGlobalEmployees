@@ -8,7 +8,7 @@ using DataEmployeeDto = MASGlobal.Employees.Shared.DTOs.Data.Employee;
 
 namespace MASGlobal.Employees.Data.Repositories
 {
-    public class EmployeeRepository : IEmployeeRepository
+    public sealed class EmployeeRepository : IEmployeeRepository
     {
         private readonly IRestClient _restClient;
 

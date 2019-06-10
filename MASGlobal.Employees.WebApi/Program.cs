@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace MASGlobal.Employees.WebApi
 {
-    public class Program
+    internal sealed class Program
     {
         public static void Main(string[] args) => CreateWebHostBuilder(args).Build().Run();
 

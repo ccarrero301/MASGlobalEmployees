@@ -1,6 +1,6 @@
 ﻿namespace MASGlobal.Employees.Shared.DTOs.Services
 {
-    public class Employee
+    public sealed class Employee
     {
         public int EmployeeId { get; set; }
 

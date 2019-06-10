@@ -6,7 +6,7 @@ using DomainEmployee = MASGlobal.Employees.Domain.Entities.Employee;
 
 namespace MASGlobal.Employees.Services.Factories.ConcreteCreators
 {
-    public class HourlySalaryContractEmployeeCreator : DomainEmployee, IEmployeeContractFactory
+    internal sealed class HourlySalaryContractEmployeeCreator : DomainEmployee, IEmployeeContractFactory
     {
         public HourlySalaryContractEmployeeCreator(int employeeId, string employeeName, EmployeeRole employeeRole,
             EmployeeContractType employeeContractType, double hourlySalary, double monthlySalary) : base(employeeId,

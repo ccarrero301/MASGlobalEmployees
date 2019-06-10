@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MASGlobal.Employees.WebApp
 {
-    public class Startup
+    internal sealed class Startup
     {
         public Startup(IConfiguration configuration) => Configuration = configuration;
 
@@ -23,7 +23,7 @@ namespace MASGlobal.Employees.WebApp
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseHsts();
             app.UseHttpsRedirection();

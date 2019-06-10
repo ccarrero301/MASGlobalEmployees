@@ -3,7 +3,7 @@ using DataEmployeeDto = MASGlobal.Employees.Shared.DTOs.Data.Employee;
 
 namespace MASGlobal.Employees.Services.Specifications
 {
-    public class EmployeeByIdSpecification : CompositeSpecification<DataEmployeeDto>
+    internal sealed class EmployeeByIdSpecification : CompositeSpecification<DataEmployeeDto>
     {
         private readonly int _employeeId;
 

@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MASGlobal.Employees.WebApp.Extensions
 {
-    public static class AddServicesExtension
+    internal static class AddServicesExtension
     {
         public static void AddDependencyInjectionServices(this IServiceCollection services, IApplicationConfiguration applicationConfiguration)
         {

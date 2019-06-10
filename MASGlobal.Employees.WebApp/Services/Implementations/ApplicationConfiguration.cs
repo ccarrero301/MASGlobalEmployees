@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace MASGlobal.Employees.WebApp.Services.Implementations
 {
-    internal class ApplicationConfiguration : IApplicationConfiguration
+    internal sealed class ApplicationConfiguration : IApplicationConfiguration
     {
         private readonly IConfiguration _configuration;
 

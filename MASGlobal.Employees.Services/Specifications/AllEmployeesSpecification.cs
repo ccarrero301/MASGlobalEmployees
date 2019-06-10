@@ -3,7 +3,7 @@ using DataEmployeeDto = MASGlobal.Employees.Shared.DTOs.Data.Employee;
 
 namespace MASGlobal.Employees.Services.Specifications
 {
-    public class AllEmployeesSpecification : CompositeSpecification<DataEmployeeDto>
+    internal sealed class AllEmployeesSpecification : CompositeSpecification<DataEmployeeDto>
     {
         public override bool IsSatisfiedBy(DataEmployeeDto entityToTest) => All().IsSatisfiedBy(entityToTest);
     }

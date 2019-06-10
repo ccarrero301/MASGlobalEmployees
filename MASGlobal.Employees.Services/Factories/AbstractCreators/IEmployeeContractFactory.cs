@@ -2,7 +2,7 @@
 
 namespace MASGlobal.Employees.Services.Factories.AbstractCreators
 {
-    public interface IEmployeeContractFactory
+    internal interface IEmployeeContractFactory
     {
         AnnualSalaryEmployee GetSalaryContractEmployee();
     }

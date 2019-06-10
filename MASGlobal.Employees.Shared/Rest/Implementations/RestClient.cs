@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MASGlobal.Employees.Shared.Rest.Entities;
 using Newtonsoft.Json;
 using Polly;
+using Polly.Retry;
 using RestSharp;
 using IRestClient = MASGlobal.Employees.Shared.Rest.Contracts.IRestClient;
 
@@ -46,29 +47,22 @@ namespace MASGlobal.Employees.Shared.Rest.Implementations
             RestSharp.IRestClient restClient,
             IRestRequest request, int maxRetryAttempts, int retryFactor)
         {
-            HttpStatusCode[] httpStatusCodesWorthRetrying =
-            {
-                HttpStatusCode.RequestTimeout, // 408
-                HttpStatusCode.InternalServerError, // 500
-                HttpStatusCode.BadGateway, // 502
-                HttpStatusCode.ServiceUnavailable, // 503
-                HttpStatusCode.GatewayTimeout // 504
-            };
+            var retryPolicy = DefineRetryPolicy<TResult>(maxRetryAttempts, retryFactor);
 
-            return Policy
-                .Handle<Exception>()
-                .OrResult<IRestResponse<TResult>>(restSharpResponse =>
-                    httpStatusCodesWorthRetrying.Contains(restSharpResponse.StatusCode))
-                .WaitAndRetryAsync(
-                    maxRetryAttempts,
-                    retryAttempt => TimeSpan.FromSeconds(Math.Pow(retryFactor, retryAttempt)),
-                    (exception, timeSpan, retryCount, context) => { })
-                .ExecuteAsync(() => restClient.ExecutePostTaskAsync<TResult>(request));
+            return retryPolicy.ExecuteAsync(() => restClient.ExecutePostTaskAsync<TResult>(request));
         }
 
         private static Task<IRestResponse<TResult>> ExecuteGetWithResponseOrExceptionRetryPolicyAsync<TResult>(
             RestSharp.IRestClient restClient,
             IRestRequest request, int maxRetryAttempts, int retryFactor)
+        {
+            var retryPolicy = DefineRetryPolicy<TResult>(maxRetryAttempts, retryFactor);
+
+            return retryPolicy.ExecuteAsync(() => restClient.ExecuteGetTaskAsync<TResult>(request));
+        }
+
+        private static AsyncRetryPolicy<IRestResponse<TResult>> DefineRetryPolicy<TResult>(int maxRetryAttempts,
+            int retryFactor)
         {
             HttpStatusCode[] httpStatusCodesWorthRetrying =
             {
@@ -79,15 +73,16 @@ namespace MASGlobal.Employees.Shared.Rest.Implementations
                 HttpStatusCode.GatewayTimeout // 504
             };
 
-            return Policy
+            var retryPolicy = Policy
                 .Handle<Exception>()
                 .OrResult<IRestResponse<TResult>>(restSharpResponse =>
                     httpStatusCodesWorthRetrying.Contains(restSharpResponse.StatusCode))
                 .WaitAndRetryAsync(
                     maxRetryAttempts,
                     retryAttempt => TimeSpan.FromSeconds(Math.Pow(retryFactor, retryAttempt)),
-                    (exception, timeSpan, retryCount, context) => { })
-                .ExecuteAsync(() => restClient.ExecuteGetTaskAsync<TResult>(request));
+                    (exception, timeSpan, retryCount, context) => { });
+
+            return retryPolicy;
         }
 
         private static RestSharp.IRestClient GetRestClient(bool useHttp, RestClientRequest requestInfo)
